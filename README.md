@@ -65,8 +65,11 @@ This process is a mathematical approach for mapping a solution in reinforcement 
   
 The series of actions taken by the agent throughout the process, defines the _policy_. And the collectionof rewards recieved defines the _value_. The goal is to maximise the rewards by choosing the optimum policy.
 <br>
+<br>
 
-**Shortest Path Problem :**
+## Implementation of the Q-learning algorithm
+This algorithm sums up the above. Its goal is to make the model reach its destination in the most efficient way possible.
+
 
   
   
