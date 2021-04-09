@@ -1,2 +1,1 @@
-# Reinforcement-learning
-Reinforcement Learning introduction
+# Reinforcement Learning Introduction
