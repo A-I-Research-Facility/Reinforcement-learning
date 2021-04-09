@@ -25,7 +25,7 @@ This is a guide to help users get started with reinforcement learning. It will c
 <br>
 
 ## 🟧 Introduction and types of Machine Learning
-Ability of a machine to learn and improve from experience rather than explicit programming.
+The ability of a machine to learn and improve from experience rather than explicit programming is termed as machine learning.
 
 Types of machine learning :<br>
   ✳️ Supervised<br>
