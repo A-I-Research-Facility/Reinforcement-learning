@@ -16,7 +16,6 @@ This is a guide to help users get started with reinforcement learning. It will c
   ▶️ Implementation of Q-learning algorithm
  <br>
 ***
-<br>
 
 ## Machine Learning
 Ability of a machine to learn and improve from experience rather than explicit programming
