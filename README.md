@@ -1,5 +1,9 @@
 # Reinforcement Learning Introduction
 
+<br>
+
+⚠️ Warning : This guide deals deep Q-Learning after a certain point and so the python codes are written assuming that anyone following this is familiar with basic python programming, how to develop models, and matrices manipulation using python. If you are not upto date on the concepts, please refresh them before jumping in the code. The README, on the other hand, is written very thorougly and can be easily followed by anyone.
+
 ### Contact us :
 For any query, please reach us at cserveairf@gmail.com or create a pull request regarding your issue.
 
