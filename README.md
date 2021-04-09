@@ -49,3 +49,6 @@ This goes on and on till the environment sends a terminal state.
 <br>
 
 ## ⚫Concepts of reinforcement learning
+  ⚛️ Reward Maximisation : The agent must be trained in a way, that it takes the _best_ action in order to maximise the reward
+  
+  ⚛️ Exploration and Exploitation : The agent explores and captures more information about the environment, and then uses that information to highten the rewards
