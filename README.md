@@ -76,6 +76,7 @@ The series of actions taken by the agent throughout the process, defines the _po
 ## 🟧 Implementation of the Q-learning algorithm
 The idea of Q-learning, is to have "Q-values" for every action that a model takes, given a state. These values need to be updated overtime in such a way, that after a course of actions, _good_ result is produced. It is done by "Rewarding" the agent.
 <br>
+<br>
 Q-Learning is also known as "Model free learning" because the learning algorithm we write is applicable to any envireonment.
 
 
