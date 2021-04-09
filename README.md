@@ -34,3 +34,4 @@ The main idea is to learn through a "Reward and Punishment" system. For every co
 It is to be noted that 'training' datasets are not present here. Neither the fed data is classified or labled. The model needs to figure out the path and the best approach to perform a certain task. The environment is also unknown to the agent.
 
 #### :atom: Consider an analogy 
+Let's suppose a baby is learning to walk.
