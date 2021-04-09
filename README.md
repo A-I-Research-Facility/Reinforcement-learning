@@ -56,4 +56,17 @@ This goes on and on till the environment sends a terminal state.
 <br>
 
 ## ⚫Understanding Markov decision process
-This process is a mathematical approach for mapping a solution in reinforcement learning. It can be assumed that, the purpose of reinforcement learning is to solve a Markov decision process
+This process is a mathematical approach for mapping a solution in reinforcement learning. It can be assumed that, the purpose of reinforcement learning is to solve a Markov decision process. There are a certain number of parameters to get to the solution. They include :<br>
+  ☑️ Set of actions (A)<br>
+  ☑️ Set of states (S)<br>
+  ☑️ Reward (R)<br>
+  ☑️ Policy used to approach the problem (pi)<br>
+  ☑️ Value (V)<br>
+  
+The series of actions taken by the agent throughout the process, defines the _policy_. And the collectionof rewards recieved defines the _value_. The goal is to maximise the rewards by choosing the optimum policy.
+
+**Shortest Path Problem : **<br>
+
+  
+  
+  
