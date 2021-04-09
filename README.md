@@ -66,9 +66,7 @@ This process is a mathematical approach for mapping a solution in reinforcement 
 The series of actions taken by the agent throughout the process, defines the _policy_. And the collectionof rewards recieved defines the _value_. The goal is to maximise the rewards by choosing the optimum policy.
 <br>
 
-**Shortest Path Problem : **
+**Shortest Path Problem :**
 
-<br>
-  
   
   
