@@ -12,7 +12,7 @@ This is a guide to help users get started with reinforcement learning. It will c
   ▶️ Understanding reinforcement learning<br>
   ▶️ How does the learning process works<br>
   ▶️ Concepts of reinforcement learning (Reward maximization, Exploration & Exploitation<br>
-  ▶️ Understanding the Markov's decision process<br>
+  ▶️ Understanding the Markov decision process<br>
   ▶️ Implementation of Q-learning algorithm
  <br>
 ***
@@ -52,3 +52,8 @@ This goes on and on till the environment sends a terminal state.
   ⚛️ Reward Maximisation : The agent must be trained in a way, that it takes the _best_ action in order to maximise the reward
   
   ⚛️ Exploration and Exploitation : The agent explores and captures more information about the environment, and then uses that information to highten the rewards
+<br>
+<br>
+
+## ⚫Understanding Markov decision process
+This process is a mathematical approach for mapping a solution in reinforcement learning. It can be assumed that, the purpose of reinforcement learning is to solve a Markov decision process
