@@ -18,5 +18,13 @@ This is a guide to help users get started with reinforcement learning. It will c
 ***
 
 ## Machine Learning
-Ability of a machine to learn and improve from experience rather than explicit programming
+Ability of a machine to learn and improve from experience rather than explicit programming.
+
+Types of machine learning :<br>
+  🟢 Supervised<br>
+  🟢 Unsupervised<br>
+  🟢 Reinforcement<br>
 <br>
+
+## Reinforcement Learning
+Reinforcement means encouraging a pattern or behaviour. This form of ML is a _hit and trail_ method, because the model is new to the surroundings. The only way to learn is to experience and then, learn from that experience. 
