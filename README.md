@@ -37,6 +37,7 @@ It is to be noted that 'training' datasets are not present here. Neither the fed
 First, the baby starts walking and makes it to the box. This result is positive since the goal is achived, and hence the baby is rewarded.<br>
 Second, it starts walking but falls due to some obstacle. This is a negative result. Not only the goal isn't achieved, but the baby also got hurt. Hence, we can say that baby is punished.
 <br>
+<br>
 
 ## How does the learning process works
 There are 2 main components of the process, the learing agent, and the environment. The environment, just like in the real world, determines all parameters of larning. In programming, we call that _algorithm_.
