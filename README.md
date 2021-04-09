@@ -33,5 +33,6 @@ The main idea is to learn through a "Reward and Punishment" system. For every co
 
 It is to be noted that 'training' datasets are not present here. Neither the fed data is classified or labled. The model needs to figure out the path and the best approach to perform a certain task. The environment is also unknown to the agent.
 
-#### :atom: Consider an analogy 
-Let's suppose a baby is learning to walk.
+:atom: **Consider an analogy** Let's suppose a baby is learning to walk towards a box of chocolates. The box acts as reward. 2 things can happen here.<br>
+First, the baby starts walking and makes it to the box. This result is positive since the goal is achived, and hence the baby is rewarded.<br>
+Second, it starts walking but falls due to some obstacle. This is a negative result. Not only the goal isn't achieved, but the baby also got hurt. Hence, we can say that baby is punished.
