@@ -67,7 +67,7 @@ The series of actions taken by the agent throughout the process, defines the _po
 <br>
 <br>
 
-## Implementation of the Q-learning algorithm
+## ⚫Implementation of the Q-learning algorithm
 This algorithm sums up the above. Its goal is to make the model reach its destination in the most efficient way possible.
 
 
