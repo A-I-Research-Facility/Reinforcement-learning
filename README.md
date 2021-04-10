@@ -19,8 +19,7 @@ This is a guide to help users get started with reinforcement learning. It will c
   ♦️ How does the learning process works<br>
   ♦️ Concepts of reinforcement learning (Reward maximization, Exploration & Exploitation<br>
   ♦️ Understanding the Markov decision process<br>
-  ♦️ Implementation of Q-learning algorithm
- <br>
+  ♦️ Implementation of Q-learning algorithm<br>
 ***
 <br>
 
