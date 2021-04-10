@@ -1,4 +1,4 @@
-# Reinforcement Learning Introduction
+# Reinforcement Learning
 
 <br>
 
