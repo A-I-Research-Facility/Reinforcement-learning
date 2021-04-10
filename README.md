@@ -79,6 +79,6 @@ The idea of Q-learning, is to have "Q-values" for every action that a model take
 <br>
 Q-Learning is also known as "Model free learning" because the learning algorithm we write is applicable to any envireonment.
 
-
+    this should be a code file
   
   
