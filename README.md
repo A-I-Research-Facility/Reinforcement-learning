@@ -74,11 +74,28 @@ The series of actions taken by the agent throughout the process, defines the _po
 <br>
 
 ## 🟧 Implementation of the Q-learning algorithm
-The idea of Q-learning, is to have "Q-values" for every action that a model takes, given a state. These values need to be updated overtime in such a way, that after a course of actions, _good_ result is produced. It is done by "Rewarding" the agent.
-<br>
-<br>
+The idea of Q-learning, is to have "Q-values" for every action that a model takes, given a state. These values need to be updated overtime in such a way, that after a course of actions, _good_ result is produced. It is done by "Rewarding" the agent.<br>
 Q-Learning is also known as "Model free learning" because the learning algorithm we write is applicable to any envireonment.
+<br>
+<br>
+The codes of Q-learning are in continuation. Please proceed serial wise to understand everything, else, it will be very confusing as to why we are doing a certain step. For running the environment, we need a library called gym.<br>
+<br>
+Installing gym - <br>
 
-    this should be a code file
+    sudo pip install gym
+
+Or -
+    sudo python3 -m pip install gym
   
-  
+<br>
+Note : gym needs another library called 'pyglet' to work. pyglet comes pre-installed with openGL, but it is the outdated version on purpose, since python v2.x only supports pyglet v<=1.5.0, >=1.4.0. If you are using python3(recommended), please update pyglet - <br>
+
+    sudo pip install pyglet --upgrade
+
+If, however, your machine does not have pyglet installed, please install the latest version for python3 - <br>
+
+    sudo pip install pyglet
+
+Or - 
+
+    sudo python3 -m pip install pyglet
