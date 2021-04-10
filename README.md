@@ -21,6 +21,7 @@ This is a guide to help users get started with reinforcement learning. It will c
   ♦️ Understanding the Markov decision process<br>
   ♦️ Implementation of Q-learning algorithm<br>
 ***
+
 <br>
 ## 🟧 Introduction and types of Machine Learning
 The ability of a machine to learn and improve from experience rather than explicit programming is termed as machine learning.
