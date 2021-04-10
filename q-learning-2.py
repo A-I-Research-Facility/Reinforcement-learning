@@ -23,12 +23,15 @@ discrete_state = get_discrete_state(env.reset())
 
 # print(discrete_state)       # Output : (7,  10) {could be anything}
 
-# We can now lookup that discrete state in the Q-table, and find the maximum Q-value
-# print(np.argmax(q_table[discrete_state]))
+'''
+We can now lookup that discrete state in the Q-table, and find the maximum Q-value
+print(np.argmax(q_table[discrete_state]))
 
-# Since now we are ready with our new discrete state, our model can take action, and start generating
-# new Q-table.
-# We now require the while loop from previous program, but instead of hardcoded values, we will use dynamic values
+Since now we are ready with our new discrete state, our model can take action, and start generating
+new Q-table.
+We now require the while loop from previous program, but instead of hardcoded values, we will use dynamic values
+'''
+
 done = False
 
 while not done:

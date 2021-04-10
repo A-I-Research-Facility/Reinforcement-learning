@@ -3,18 +3,25 @@
 import gym      # pip installation
 
 env = gym.make("MountainCar-v0")    # this creates an environment with a mountain, and a car
-env.reset()     # Resetting is the first thing to do after we create an environment
-                # Then we are ready to iterate through it
+env.reset()     
+'''
+Resetting is the first thing to do after we create an environment
+Then we are ready to iterate through it
+'''
+
 done = False
 
 while not done:
     action = 2      # This environment has three actions, 0 = push car left, 1 = do nothing, 2 = push car right
-    new_state, reward, done, _ = env.step(action)   # everytime we step through an action, we get a new_state from environment
-                                                    # For our sake of understanding, we know that the state returned by the 
-                                                    # environment is position and velocity.
-                                                    # Note : the states returned over her are continuous. We need to convert them
-                                                    # to discrete or else our model will continue to train in a never ending scenario.
-                                                    # We will do this conversion at the necessary time.'''
+    new_state, reward, done, _ = env.step(action)   
+    '''
+    everytime we step through an action, we get a new_state from environment
+    For our sake of understanding, we know that the state returned by the 
+    environment is position and velocity.
+    Note : the states returned over her are continuous. We need to convert them
+    to discrete or else our model will continue to train in a never ending scenario.
+    We will do this conversion at the necessary time.'''
+
     env.render()    # rendering the GUI
 
 env.close()
@@ -38,25 +45,30 @@ Q-values with time.'''
 RL model would not have this hardcoded beacuse it will change with environment'''
 DISCRETE_OS_SIZE = [20] * len(env.observation_space.high) # 20 * the length of any random observation space thing = [20] * 2
 
-# We are trying to separate the range of observation into 20 discrete chunks. Now we need to know the size of
-# those chunks
+'''
+We are trying to separate the range of observation into 20 discrete chunks. Now we need to know the size of
+those chunks
+'''
+
 discrete_os_win_size = (env.observation_space.high-env.observation_space.low) / DISCRETE_OS_SIZE
 
 # print(discrete_os_win_size)     # Output : [0.09     0.007]
 
-#       ______________________________________
-#      |Combinations/Actions|  0  |  1  |  2  |
-#      +--------------------+-----+-----+-----+
-#      |        C1          |  0  |  2  |  2  |     <- Q-values, the action with largest q-value is chosen
-#      +--------------------+-----+-----+-----+                  to be performed by the agent. Initially it doesn't 
-#      |        C2          |  0  |  1  |  2  |                  happen. But overtime the agent realises what to do.
-#      +--------------------+-----+-----+-----+
-#      |        C3          |  2  |  0  |  1  |
-#      +--------------------+-----+-----+-----+
+'''
+      ______________________________________
+     |Combinations/Actions|  0  |  1  |  2  |
+     +--------------------+-----+-----+-----+
+     |        C1          |  0  |  2  |  2  |     <- Q-values, the action with largest q-value is chosen
+     +--------------------+-----+-----+-----+                  to be performed by the agent. Initially it doesn't 
+     |        C2          |  0  |  1  |  2  |                  happen. But overtime the agent realises what to do.
+     +--------------------+-----+-----+-----+
+     |        C3          |  2  |  0  |  1  |
+     +--------------------+-----+-----+-----+
+'''
 
 # Initialising the Q-table :
 import numpy as np
-q_table = np.random.uniform(low = -2, high = 0, size = (DISCRETE_OS_SIZE + [env.action_space.n]))       # low = lowest value, high = highest value
-                                                                                                        # size = 3 dimensional table, thus having
-print(q_table.shape)                                                                                    # a Q-value for every possible combination
-                                                                                                        # of actions.
+q_table = np.random.uniform(low = -2, high = 0, size = (DISCRETE_OS_SIZE + [env.action_space.n]))   # low = lowest value, high = highest value
+                                                                                                    # size = 3 dimensional table, thus having
+print(q_table.shape)                                                                                # a Q-value for every possible combination
+                                                                                                    # of actions.
