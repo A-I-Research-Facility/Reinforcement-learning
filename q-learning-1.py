@@ -26,7 +26,8 @@ while not done:
 
 env.close()
 
-'''When we run this program, we see a car trying to climb the hill. But it isn't able to because it needs more momentum.
+'''
+When we run this program, we see a car trying to climb the hill. But it isn't able to because it needs more momentum.
 So, now we need to do that
 
 What we require, technically, is a mathematical function. But, in reality, we are just going to take the python form of it.
@@ -34,7 +35,8 @@ That python code we are creating now is called Q-table. It's a large table, that
 position and velocity of the car. We can just look at the table, to get our desired answer.
 
 We initialise the Q-table with random values. So, first our agent explores and does random stuff, but slowly updates those
-Q-values with time.'''
+Q-values with time.
+'''
 
 ''' To check all observations and all possible actions, run following (only works in gym environments):'''
 # print(env.observation_space.high)       # Output : [0.6     0.07]
