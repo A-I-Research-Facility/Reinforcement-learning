@@ -52,3 +52,8 @@ print(discrete_os_win_size)     # Output : [0.09     0.007]
 #      +--------------------+-----+-----+-----+
 
 # Initialising the Q-table :
+import numpy as np
+q_table = np.random.uniform(low = -2, high = 0, size = (DISCRETE_OS_SIZE + [env.action_space.n]))       # low = lowest value, high = highest value
+                                                                                                        # size = 3 dimensional table, thus having
+print(q_table.shape)                                                                                    # a Q-value for every possible combination
+                                                                                                        # of actions.
