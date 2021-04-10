@@ -14,28 +14,28 @@ while not done:
                                                     # environment is position and velocity.
                                                     # Note : the states returned over her are continuous. We need to convert them
                                                     # to discrete or else our model will continue to train in a never ending scenario.
-                                                    # We will do this conversion at the necessary time.
+                                                    # We will do this conversion at the necessary time.'''
     env.render()    # rendering the GUI
 
 env.close()
 
-# When we run this program, we see a car trying to climb the hill. But it isn't able to because it needs more momentum.
-# So, now we need to do that
+'''When we run this program, we see a car trying to climb the hill. But it isn't able to because it needs more momentum.
+So, now we need to do that
 
-# What we require, technically, is a mathematical function. But, in reality, we are just going to take the python form of it.
-# That python code we are creating now is called Q-table. It's a large table, that carries all possible combinations of
-# position and velocity of the car. We can just look at the table, to get our desired answer.
+What we require, technically, is a mathematical function. But, in reality, we are just going to take the python form of it.
+That python code we are creating now is called Q-table. It's a large table, that carries all possible combinations of
+position and velocity of the car. We can just look at the table, to get our desired answer.
 
-# We initialise the Q-table with random values. So, first our agent explores and does random stuff, but slowly updates those
-# Q-values with time.
+We initialise the Q-table with random values. So, first our agent explores and does random stuff, but slowly updates those
+Q-values with time.'''
 
-# To check all observations and all possible actions, run following (only works in gym environments):
+''' To check all observations and all possible actions, run following (only works in gym environments):'''
 # print(env.observation_space.high)       # Output : [0.6     0.07]
 # print(env.observation_space.low)        # Output : [-1.2     -0.07]
 # print(env.action_space.n)               # Output : 3
 
-# We want our Q-table to be of managable size. However, hardcoding the size is not the right move, since a real
-# RL model would not have this hardcoded beacuse it will change with environment
+'''We want our Q-table to be of managable size. However, hardcoding the size is not the right move, since a real
+RL model would not have this hardcoded beacuse it will change with environment'''
 DISCRETE_OS_SIZE = [20] * len(env.observation_space.high) # 20 * the length of any random observation space thing = [20] * 2
 
 # We are trying to separate the range of observation into 20 discrete chunks. Now we need to know the size of
