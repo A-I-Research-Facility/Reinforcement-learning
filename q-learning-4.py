@@ -68,14 +68,18 @@ class Blob:
         return (self.x - other.x, self.y - other.y)
 
     def action(self, choice):   # We are making this method to interact with another method in case we want to add more players
+        '''
+        The moves that we are coding here only allows diagonal movement. To make a blob go
+        up-down and side to side, add the codes for only x, and only y.
+        '''
         if choice == 0:
             self.move(x = 1, y = 1)
         elif choice == 1:
-            self.move(x = 1, y = -1)
+            self.move(x = -1, y = -1)
         if choice == 2:
             self.move(x = -1, y = 1)
         if choice == 3:
-            self.move(x = -1, y = -1)
+            self.move(x = 1, y = -1)
 
     def move(self, x = False, y = False):
         pass
