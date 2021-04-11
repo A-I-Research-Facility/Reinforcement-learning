@@ -88,8 +88,7 @@ Or -
     sudo python3 -m pip install gym
   
 <br>
-## ⚠️ Note : 
-gym needs another library called 'pyglet' to work. Pyglet comes pre-installed with openGL, but it is the outdated version on purpose, since python v2.x only supports pyglet version (<= 1.5.0, >= 1.4.0). If you are using python3(recommended), please update pyglet - <br>
+⚠️ Note : gym needs another library called 'pyglet' to work. Pyglet comes pre-installed with openGL, but it is the outdated version on purpose, since python v2.x only supports pyglet version (<= 1.5.0, >= 1.4.0). If you are using python3(recommended), please update pyglet - <br>
 <br>
 
     sudo pip install pyglet --upgrade
