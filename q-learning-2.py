@@ -63,7 +63,10 @@ for episode in range(EPISODES):
     done = False
 
     while not done:
-        action = np.argmax(q_table[discrete_state])     # we will have new discrete state soon
+        if np.random.random() > epsilon:
+            action = np.argmax(q_table[discrete_state])     # we will have new discrete state soon
+        else:
+            action = np.random.randint(0, env.action_space.n)
         new_state, reward, done, _ = env.step(action)
         new_discrete_state = get_discrete_state(new_state)
         if render:
