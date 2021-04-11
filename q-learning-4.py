@@ -40,5 +40,42 @@ d = {1: (255, 175, 0),
     3: (0, 0, 255)}
 
 '''
-Now we need a blob class. 
+Now we need a blob class. All the blobs have a lot of same attributes, like, movement directions,
+starting locations, etc.
+
+We are defining observation in our environment as the relative location of food, and the relative
+location of the enemy. So, we need to create a blob class to handle all of the repeated things with ease.
 '''
+
+class Blob:
+    def __init__(self):
+        self.x = np.random.randint(0, SIZE)
+        self.y = np.random.randint(0, SIZE)
+        '''
+        Few things to note here that we want to avoid:
+        1) The player could spawn on the food;
+        2) Player could spawn on enemy;
+        3) Enemy could spawn on the food.
+
+        We want to avoid all the above scenarios. But since we are making a very simple
+        environment here, we won't worry about that for now.
+        '''
+
+    def __str__(self):
+        return f"{self.x}, {self.y}"
+    
+    def __sub__(self, other):
+        return (self.x - other.x, self.y - other.y)
+
+    def action(self, choice):   # We are making this method to interact with another method in case we want to add more players
+        if choice == 0:
+            self.move(x = 1, y = 1)
+        elif choice == 1:
+            self.move(x = 1, y = 1)
+        if choice == 2:
+            self.move(x = 1, y = 1)
+        if choice == 3:
+            self.move(x = 1, y = 1)
+
+    def move(self, x = False, y = False):
+        pass
