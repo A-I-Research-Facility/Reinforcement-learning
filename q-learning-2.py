@@ -13,13 +13,12 @@ SHOW_EVERY = 2000
 DISCRETE_OS_SIZE = [20] * len(env.observation_space.high)
 discrete_os_win_size = (env.observation_space.high-env.observation_space.low) / DISCRETE_OS_SIZE
 
-epsilon = 0.5       # the higher the epsilon, the more likely the model is to perform a random action
-
 '''
 Some models require some random actions to be taken to ge the desired result. For this, we need to define
 epsilon over here. Even though in this case, our model is able to achive the goal without requiring
 this varible. Also, the value of epsilon varies between 0 and 1 only.
 '''
+epsilon = 0.5       # the higher the epsilon, the more likely the model is to perform a random action
 
 q_table = np.random.uniform(low = -2, high = 0, size = (DISCRETE_OS_SIZE + [env.action_space.n]))
 
