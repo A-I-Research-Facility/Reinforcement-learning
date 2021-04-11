@@ -115,3 +115,12 @@ We are finished with our blob class. Now, we either want to create a Q-table, or
 '''
 if start_q_table is None:
     q_table = {}
+    '''
+    Our observation space will look like :
+    (x1, y1), (x2, y2)
+    So, to iterate through every possibility, we need 4 nested FOR loops.
+    '''
+    # for i in range(-SIZE + 1, SIZE):
+    #     for i in range(-SIZE + 1, SIZE):
+    #         for i in range(-SIZE + 1, SIZE):
+    #             for i in range(-SIZE + 1, SIZE):
