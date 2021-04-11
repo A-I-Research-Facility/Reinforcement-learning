@@ -71,11 +71,11 @@ class Blob:
         if choice == 0:
             self.move(x = 1, y = 1)
         elif choice == 1:
-            self.move(x = 1, y = 1)
+            self.move(x = 1, y = -1)
         if choice == 2:
-            self.move(x = 1, y = 1)
+            self.move(x = -1, y = 1)
         if choice == 3:
-            self.move(x = 1, y = 1)
+            self.move(x = -1, y = -1)
 
     def move(self, x = False, y = False):
         pass
