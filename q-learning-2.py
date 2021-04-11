@@ -17,8 +17,15 @@ discrete_os_win_size = (env.observation_space.high-env.observation_space.low) / 
 Some models require some random actions to be taken to ge the desired result. For this, we need to define
 epsilon over here. Even though in this case, our model is able to achive the goal without requiring
 this varible. Also, the value of epsilon varies between 0 and 1 only.
+
+Epsilon basically helps the model explore in random directions. It is suprising what the model finds
+out sometimes.
 '''
 epsilon = 0.5       # the higher the epsilon, the more likely the model is to perform a random action
+START_EPSILON_DECAYING = 1
+END_EPSILON_DECAYING = EPISODES // 2
+
+epsilon_decay_value = epsilon / (END_EPSILON_DECAYING - START_EPSILON_DECAYING) # Amount decayed by in each episode
 
 q_table = np.random.uniform(low = -2, high = 0, size = (DISCRETE_OS_SIZE + [env.action_space.n]))
 
@@ -82,5 +89,8 @@ for episode in range(EPISODES):
             q_table[discrete_state + (action, )] = 0
 
         discrete_state = new_discrete_state
+    
+    if END_EPSILON_DECAYING >= episode >= START_EPSILON_DECAYING:
+        epsilon -= epsilon_decay_value
 
 env.close()
