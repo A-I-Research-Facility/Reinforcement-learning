@@ -79,7 +79,7 @@ for episode in range(EPISODES):
     ep_rewards.append(episode_reward)
 
     if not episode % SHOW_EVERY:
-        average_reward = sum(ep_rewards[-SHOW_EVERY:]) / len(ep_rewards[-SHOW_EVERY])
+        average_reward = sum(ep_rewards[-SHOW_EVERY:]) / len(ep_rewards[-SHOW_EVERY:])
         aggr_ep_rewards['ep'].append(episode)
         aggr_ep_rewards['avg'].append(average_reward)
         aggr_ep_rewards['min'].append(min(ep_rewards[-SHOW_EVERY:]))
