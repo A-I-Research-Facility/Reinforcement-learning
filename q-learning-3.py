@@ -1,5 +1,6 @@
 import gym
 import numpy as np
+import matplotlib.pyplot as plt
 
 env = gym.make("MountainCar-v0")
 
@@ -84,4 +85,12 @@ for episode in range(EPISODES):
         aggr_ep_rewards['min'].append(min(ep_rewards[-SHOW_EVERY:]))
         aggr_ep_rewards['max'].append(max(ep_rewards[-SHOW_EVERY:]))
 
+        print(f"Episode : {episode} Average : {average_reward} Min : {min(ep_rewards[-SHOW_EVERY:])} Max : {max(ep_rewards[-SHOW_EVERY:])}")
+
 env.close()
+
+plt.plot(aggr_ep_rewards['ep'], aggr_ep_rewards['avg'], label='avg')
+plt.plot(aggr_ep_rewards['ep'], aggr_ep_rewards['min'], label='min')
+plt.plot(aggr_ep_rewards['ep'], aggr_ep_rewards['max'], label='max')
+plt.legend(loc=4)
+plt.show()
