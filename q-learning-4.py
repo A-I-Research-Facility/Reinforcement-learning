@@ -76,10 +76,42 @@ class Blob:
             self.move(x = 1, y = 1)
         elif choice == 1:
             self.move(x = -1, y = -1)
-        if choice == 2:
+        elif choice == 2:
             self.move(x = -1, y = 1)
-        if choice == 3:
+        elif choice == 3:
             self.move(x = 1, y = -1)
 
     def move(self, x = False, y = False):
-        pass
+        '''
+        We wanna be able to move randomly if not value is passed,
+        or very specifically otherwise.
+        '''
+        if not x:
+            self.x += np.random.randint(-1, 2)  # this can attain value 0, so this random movement can be up down
+        else:
+            self.x += x
+
+        if not y:
+            self.y += np.random.randint(-1, 2)  # this can attain value 0, so this random movement can be up down
+        else:
+            self.y += y
+        
+        '''
+        Remember that we are making a 10 x 10 grid. We need to create movement boundaries for
+        our agent.
+        '''
+        if self.x < 0:
+            self.x = 0
+        elif self.x > SIZE - 1:
+            self.x = SIZE - 1
+
+        if self.y < 0:
+            self.y = 0
+        elif self.y > SIZE - 1:
+            self.y = SIZE - 1
+
+'''
+We are finished with our blob class. Now, we either want to create a Q-table, or load an existing one.
+'''
+if start_q_table is None:
+    q_table = {}
