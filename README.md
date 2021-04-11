@@ -100,3 +100,4 @@ If, however, your machine does not have pyglet installed, please install the lat
 Or - 
 
     sudo python3 -m pip install pyglet
+
