@@ -1,3 +1,12 @@
+'''
+In the previous program, our agent achieved its target. Now, we want
+to measure the metrics of its achievements. This will help us select the best
+Q-table for training a model under given circumstances.
+
+In this program, we measure all the important metrics like episode number, 
+trailing average, and finally plot a graph using matplotlib.
+'''
+
 import gym
 import numpy as np
 import matplotlib.pyplot as plt
