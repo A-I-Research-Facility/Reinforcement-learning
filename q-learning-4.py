@@ -10,6 +10,10 @@ When the environment renders, we will see all these 3 blobs on a black backgroun
 training, we will start to see results. Result analysis :
 1) If red and blue blob remain on sceen, means our agent got to the food
 2) If green and red blob remain, means our agent got to the enemy
+
+Interesting thing to note : We will restrict our agent's movement to diagonals only, so it
+can't move up or down in a straight line. But, it will learn on its own, to use the boundaries
+of the grid (edges of the render window) to correct its direction and go to the required place.
 '''
 
 import numpy as np
