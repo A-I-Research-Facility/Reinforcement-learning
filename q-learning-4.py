@@ -127,7 +127,7 @@ if start_q_table is None:
                     q_table[((x1, y1), (x2, y2))] = [np.random.uniform(-5, 0) for i in range(4)]
 else:
     with open(start_q_table, "rb") as f:
-        q_table = pickel.load(f)
+        q_table = pickle.load(f)
 
 '''
 Now, we have our training to do.
@@ -192,4 +192,38 @@ for episode in range(HM_EPISODES):
         '''
         if show:
             env = np.zeros((SIZE, SIZE, 3), dtype = np.uint8)   # this is all zeros so it is a black environment for now
-            env[food.x][food.y]
+            env[food.y][food.x] = d[FOOD_N]     # if we add multiple foods, the dictionary method is a big help
+            env[player.y][player.x] = d[PLAYER_N]
+            env[enemy.y][enemy.x] = d[ENEMY_N]
+
+            '''
+            For now, we have a coloured grid, but it is still just a 10 x 10 grid.
+            We want to make it an image now.
+            '''
+            img = Image.fromarray(env, "RGB")       # even though we are saying RGB here, it still defines as BGR. That is why
+                                                    # we defined the colours in BGR format in the beginning.
+            img = img.resize((300, 300))
+            cv2.imshow("", np.array(img))
+            if reward == FOOD_REWARD or reward == -ENEMY_PENALTY:
+                if cv2.waitKey(500) & 0xFF == ord("q"):
+                    break
+            else:
+                if cv2.waitKey(1) & 0xFF == ord("q"):
+                    break
+
+        episode_reward += reward
+        if reward == FOOD_REWARD or reward == -ENEMY_PENALTY:
+            break
+
+    episode_rewards.append(episode_reward)
+    epsilon *= EPS_DECAY
+
+moving_avg = np.convolve(episode_rewards, np.ones((SHOW_EVERY, )) / SHOW_EVERY, mode = "valid")
+
+plt.plot([i for i in range(len(moving_avg))], moving_avg)
+plt.ylabel(f"reward {SHOW_EVERY}ma")
+plt.xlabel("episode #")
+plt.show()
+
+with open(f"qtable-{int(time.time())}.pickle", "wb") as f:
+    pickle.dump(q_table, f)
