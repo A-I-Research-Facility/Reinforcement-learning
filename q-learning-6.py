@@ -1,7 +1,7 @@
 '''
 In continuation with the previous program, we are now going to train
 our DQN model.
-TensorFloe version = 2.4.1 used
+TensorFlow version = 2.4.1 used
 '''
 
 import tensorflow as tf
@@ -25,13 +25,13 @@ MINIBATCH_SIZE = 64     # batch size for training data
 DISCOUNT = 0.99
 UPDATE_TARGET_EVERY = 5
 MIN_REWARD = -200
-EPISODES = 20_000
+EPISODES = 50        # 20_000
 
 epsilon = 1
 EPSILON_DECAY = 0.99975
 MIN_EPSILON = 0.001
 
-AGGREGATE_STATS_EVERY = 100     # number of episodes to see stats= 100
+AGGREGATE_STATS_EVERY = 10     # number of episodes to see stats = 100
 SHOW_PREVIEW = False
 
 '''
@@ -203,7 +203,15 @@ class ModifiedTensorBoard(TensorBoard):
         self._log_write_dir = self.log_dir
 
     def set_model(self, model):
-        pass
+        self.model = model
+
+        self._train_dir = os.path.join(self._log_write_dir, 'train')
+        self._train_step = self.model._train_counter
+
+        self._val_dir = os.path.join(self._log_write_dir, 'validation')
+        self._val_step = self.model._test_counter
+
+        self._should_write_train_graph = False
 
     def on_epoch_end(self, epoch, logs=None):
         self.update_stats(**logs)
