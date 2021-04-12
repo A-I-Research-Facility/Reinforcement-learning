@@ -80,8 +80,6 @@ Q-Learning is also known as "Model free learning" because the learning algorithm
 The Q-learning formula : <br>
 <img align="left" alt="q-learning" width="1000px" src="https://miro.medium.com/max/2844/1*VItpGaVoIUnh0RUEArqSGQ.png">
 <br>
-<br>
-<br>
 
 The codes of Q-learning are in continuation. Please proceed serial wise to understand everything, else, it will be very confusing as to why we are doing a certain step. For running the environment, we need a library called gym.<br>
 <br>
