@@ -125,3 +125,33 @@ if start_q_table is None:
             for x2 in range(-SIZE + 1, SIZE):
                 for y2 in range(-SIZE + 1, SIZE):
                     q_table[((x1, y1), (x2, y2))] = [np.random.uniform(-5, 0) for i in range(4)]
+else:
+    with open(start_q_table, "rb") as f:
+        q_table = pickel.load(f)
+
+'''
+Now, we have our training to do.
+'''
+episode_rewards = []
+
+for episode in range(HM_EPISODES):
+    player = Blob()
+    food = Blob()
+    enemy = Blob()
+
+    if episode % SHOW_EVERY == 0:
+        print(f"on # {episode}, epsilon : {epsilon}")
+        print(f"{SHOW_EVERY} ep mean {np.mean(episode_rewards[-SHOW_EVERY:])}")
+        show = True
+    else:
+        show = False
+
+    episode_reward = 0
+    for i in range(200):
+        obs = (player - food, player - enemy)   # Operator overloading
+        if np.random.random() > epsilon:
+            action = np.argmax(q_table[obs])
+        else:
+            action = np.random.randint(0, 4)
+        
+        player.action()
