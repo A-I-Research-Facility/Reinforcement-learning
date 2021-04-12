@@ -101,6 +101,6 @@ class DQNAgent:
         self.replay_memory.append(transition)
 
     def get_qs(self, state, step):
-        return self.model_predeict(np.array(state).reshape(-1, *state.shape) / 255)[0]      # to normalize the RGB image data that we are
+        return self.model.predeict(np.array(state).reshape(-1, *state.shape) / 255)[0]      # to normalize the RGB image data that we are
                                                                                             # passing, we divide by 255
                         

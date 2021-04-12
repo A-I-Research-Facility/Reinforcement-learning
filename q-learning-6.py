@@ -3,6 +3,7 @@ In continuation with the previous program, we are now going to train
 our DQN model.
 '''
 
+import tensorflow as tf
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Conv2D, MaxPooling2D, Activation, Flatten
 from keras.callbacks import TensorBoard
@@ -10,8 +11,11 @@ from keras.optimizers import Adam
 from collections import deque
 import time
 import numpy as np
+from tqdm import tqdm
 import random
+import os
 from PIL import Image as Img
+import cv2
 
 REPLAY_MEMORY_SIZE = 50_000
 MODEL_NAME = "256x2"
@@ -184,7 +188,7 @@ ep_rewards = [-200]
 # For more repetitive results
 random.seed(1)
 np.random.seed(1)
-tf.set_random_seed(1)
+tf.random.set_seed(1)
 
 # Create models folder
 if not os.path.isdir('models'):
@@ -246,8 +250,8 @@ class DQNAgent:
     def update_replay_memory(self, transition):
         self.replay_memory.append(transition)
 
-    def get_qs(self, state, step):
-        return self.model_predeict(np.array(state).reshape(-1, *state.shape) / 255)[0]
+    def get_qs(self, state):
+        return self.model.predict(np.array(state).reshape(-1, *state.shape) / 255)[0]
 
     def train(self, terminal_state, step):
         if len(self.replay_memory) < MIN_REPLAY_MEMORY_SIZE:
