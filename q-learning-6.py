@@ -19,10 +19,86 @@ MIN_REPLAY_MEMORY_SIZE = 1_000
 MINIBATCH_SIZE = 64     # batch size for training data
 DISCOUNT = 0.99
 UPDATE_TARGET_EVERY = 5
+MIN_REWARD = -200
+EPISODES = 20_000
+
+epsilon = 1
+EPSILON_DECAY = 0.99975
+MIN_EPSILON = 0.001
+
+AGGREGATE_STATS_EVERY = 100     # number of episodes to see stats= 100
+SHOW_PREVIEW = False
 
 '''
-Now we want to bring in our environment and blob class.
+Now we want to bring in our blob class and blob environment.
 '''
+class Blob:
+    def __init__(self, size):
+        self.size = size
+        self.x = np.random.randint(0, size)
+        self.y = np.random.randint(0, size)
+
+    def __str__(self):
+        return f"Blob ({self.x}, {self.y})"
+
+    def __sub__(self, other):
+        return (self.x-other.x, self.y-other.y)
+
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+
+    def action(self, choice):
+        '''
+        Gives us 9 total movement options. (0,1,2,3,4,5,6,7,8)
+        So, now our agent doesn't need to take help of the boundaries
+        to go up-down or left-right.
+        '''
+        if choice == 0:
+            self.move(x=1, y=1)
+        elif choice == 1:
+            self.move(x=-1, y=-1)
+        elif choice == 2:
+            self.move(x=-1, y=1)
+        elif choice == 3:
+            self.move(x=1, y=-1)
+
+        elif choice == 4:
+            self.move(x=1, y=0)
+        elif choice == 5:
+            self.move(x=-1, y=0)
+
+        elif choice == 6:
+            self.move(x=0, y=1)
+        elif choice == 7:
+            self.move(x=0, y=-1)
+
+        elif choice == 8:
+            self.move(x=0, y=0)
+
+    def move(self, x=False, y=False):
+        # If no value for x, move randomly
+        if not x:
+            self.x += np.random.randint(-1, 2)
+        else:
+            self.x += x
+
+        # If no value for y, move randomly
+        if not y:
+            self.y += np.random.randint(-1, 2)
+        else:
+            self.y += y
+
+        # If we are out of bounds, fix!
+        if self.x < 0:
+            self.x = 0
+        elif self.x > self.size-1:
+            self.x = self.size-1
+        if self.y < 0:
+            self.y = 0
+        elif self.y > self.size-1:
+            self.y = self.size-1
+
+
 class BlobEnv:
     SIZE = 10
     RETURN_IMAGES = True
@@ -59,11 +135,12 @@ class BlobEnv:
     def step(self, action):
         self.episode_step += 1
         self.player.action(action)
-
-        #### MAYBE ###
-        #self.enemy.move()
-        #self.food.move()
-        ##############
+        
+        '''
+        To make the food and enemy move :
+        self.enemy.move()
+        self.food.move()
+        '''
 
         if self.RETURN_IMAGES:
             new_observation = np.array(self.get_image())
@@ -95,7 +172,7 @@ class BlobEnv:
         env[self.food.x][self.food.y] = self.d[self.FOOD_N]  # sets the food location tile to green color
         env[self.enemy.x][self.enemy.y] = self.d[self.ENEMY_N]  # sets the enemy location to red
         env[self.player.x][self.player.y] = self.d[self.PLAYER_N]  # sets the player tile to blue
-        img = Img.fromarray(env, 'RGB')  # reading to rgb. Apparently. Even tho color definitions are bgr. ???
+        img = Img.fromarray(env, 'RGB')  # reading to rgb. Apparently. Even tho color definitions are bgr.
         return img
 
 
@@ -108,10 +185,6 @@ ep_rewards = [-200]
 random.seed(1)
 np.random.seed(1)
 tf.set_random_seed(1)
-
-# Memory fraction, used mostly when trai8ning multiple agents
-#gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=MEMORY_FRACTION)
-#backend.set_session(tf.Session(config=tf.ConfigProto(gpu_options=gpu_options)))
 
 # Create models folder
 if not os.path.isdir('models'):
@@ -223,3 +296,58 @@ class DQNAgent:
         if self.target_update_counter > UPDATE_TARGET_EVERY:
             self.target_model.set_weights(self.model.get_weights())
             self.target_update_counter = 0
+
+# Create agent
+agent = DQNAgent()
+
+'''
+Now we are ready to iterate over everything
+'''
+for episode in tqdm(range(1, EPISODES + 1), ascii = True, unit = "episode"):
+    agent.tensorboard.step = episode
+    
+    episode_reward = 0
+    step = 1
+    current_state = env.reset()
+
+    done = False
+
+    while not done:
+        if np.random.random() > epsilon:
+            action = np.argmax(agent.get_qs(current_state))
+        else:
+            action = np.random.randint(0, env.ACTION_SPACE_SIZE)
+
+        new_state_reward, done = env.step(action)
+
+        episode_reward += reward
+
+        if SHOW_PREVIEW and not episode % AGGREGATE_STATS_EVERY:
+            env.render()
+
+        agent.update_replay_memory((current_state, action, reward, new_state, done))
+        agent.train(done, step)
+
+        current_state = new_state
+        step += 1
+
+    '''
+    Now we are going to append episode reward and then we will grab various aggregate stats.
+    Then we will create a matplotlib chart with those values.
+    '''
+    # Append episode reward to a list and log stats (every given number of episodes)
+    ep_rewards.append(episode_reward)
+    if not episode % AGGREGATE_STATS_EVERY or episode == 1:
+        average_reward = sum(ep_rewards[-AGGREGATE_STATS_EVERY:])/len(ep_rewards[-AGGREGATE_STATS_EVERY:])
+        min_reward = min(ep_rewards[-AGGREGATE_STATS_EVERY:])
+        max_reward = max(ep_rewards[-AGGREGATE_STATS_EVERY:])
+        agent.tensorboard.update_stats(reward_avg=average_reward, reward_min=min_reward, reward_max=max_reward, epsilon=epsilon)
+
+        # Save model, but only when min reward is greater or equal a set value
+        if min_reward >= MIN_REWARD:
+            agent.model.save(f'models/{MODEL_NAME}__{max_reward:_>7.2f}max_{average_reward:_>7.2f}avg_{min_reward:_>7.2f}min__{int(time.time())}.model')
+
+    # Decay epsilon
+    if epsilon > MIN_EPSILON:
+        epsilon *= EPSILON_DECAY
+        epsilon = max(MIN_EPSILON, epsilon)
