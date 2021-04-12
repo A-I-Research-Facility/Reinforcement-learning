@@ -1,7 +1,7 @@
 '''
 Introduction to deep Q-learning. 
 Deep Q-learning is the combination of deep learning and reinforcement learning. Here, we create 
-a RL model with a neural network consisting of hidden layers.
+a RL model with a neural network similar to that of in deep learning.
 '''
 
 from keras.models import Sequential
