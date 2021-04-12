@@ -1,6 +1,18 @@
-# The evironment used over here doesn't make a difference to our model, but it's easy to understand
+'''
+This is a program to open and explore a basic Q-learning environment.
 
-import gym      # pip installation
+We use the 'gym' library to open an environment called 'MountainCar-v0". It is
+a simple environment consisting of 2 hills, a car and a destination marked with a
+flag. The goal of our model will be to make the car reach the flag. The environment
+only allows 3 actions for the car : a) go left, b) go right, c) don't move
+
+This program serves as an introduction to Q-tables, how they are created, and used.
+
+The evironment used over here doesn't make a difference to our model, but we are using
+it because of its simplicity.
+'''
+
+import gym
 
 env = gym.make("MountainCar-v0")    # this creates an environment with a mountain, and a car
 env.reset()     
@@ -20,8 +32,8 @@ while not done:
     environment is position and velocity.
     Note : the states returned over her are continuous. We need to convert them
     to discrete or else our model will continue to train in a never ending scenario.
-    We will do this conversion at the necessary time.'''
-
+    We will do this conversion at the necessary time.
+    '''
     env.render()    # rendering the GUI
 
 env.close()
