@@ -77,6 +77,9 @@ The idea of Q-learning, is to have "Q-values" for every action that a model take
 Q-Learning is also known as "Model free learning" because the learning algorithm we write is applicable to any envireonment.
 <br>
 <br>
+The Q-learning formula : <br>
+<br>
+1*VItpGaVoIUnh0RUEArqSGQ.png
 The codes of Q-learning are in continuation. Please proceed serial wise to understand everything, else, it will be very confusing as to why we are doing a certain step. For running the environment, we need a library called gym.<br>
 <br>
 Installing gym - <br>
