@@ -147,6 +147,7 @@ for episode in range(HM_EPISODES):
         show = False
 
     episode_reward = 0
+
     for i in range(200):
         obs = (player - food, player - enemy)   # Operator overloading
         if np.random.random() > epsilon:
@@ -161,5 +162,34 @@ for episode in range(HM_EPISODES):
         food.move()
         But for training purposes now, it is better to not let them move initially in order to keep
         things simple.
-        '''
         
+        Now, assigning the rewards to actions
+        '''
+        if player.x == enemy.x and player.y == enemy.y:
+            reward = -ENEMY_PENALTY
+        elif player.x == food.x and player.y == food.y:
+            reward = FOOD_REWARD
+        else:
+            reward = -MOVE_PENALTY
+        
+        # To make our Q function, we need to be able to make a new observation based on the movement
+        new_obs = (player - food, player - enemy)
+        max_future_q = np.max(q_table[new_obs])
+        current_q = q_table[obs][action]
+
+        # Now we are ready to calculate our Q-function
+        if reward == FOOD_REWARD:
+            new_q = FOOD_REWARD
+        elif reward == -ENEMY_PENALTY:
+            new_q = -ENEMY_PENALTY
+        else:
+            new_q = (1 - LEARNING_RATE) * cuurent_q + LEARNING_RATE * (reward + DISCOUNT * max_future_q)
+
+        q_table[obs][action] = new_q
+
+        '''
+        Now, we are done with the Q-leaarning. We now want to see the environment and track the metrics
+        '''
+        if show:
+            env = np.zeros((SIZE, SIZE, 3), dtype = np.uint8)   # this is all zeros so it is a black environment for now
+            env[food.x][food.y]
