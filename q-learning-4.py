@@ -159,4 +159,7 @@ for episode in range(HM_EPISODES):
         Later, we might wanna make the enemy and the food move. For that, use the commands below :
         enemy.move()
         food.move()
+        But for training purposes now, it is better to not let them move initially in order to keep
+        things simple.
         '''
+        
