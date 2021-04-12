@@ -2,6 +2,8 @@
 Introduction to deep Q-learning. 
 Deep Q-learning is the combination of deep learning and reinforcement learning. Here, we create 
 a RL model with a neural network similar to that of in deep learning.
+
+This program only creates the model. We will train the model in the next program.
 '''
 
 from keras.models import Sequential
@@ -10,6 +12,7 @@ from keras.callbacks import TensorBoard
 from keras.optimizers import Adam
 from collections import deque
 import time
+import numpy as np
 
 '''
 self.model is getting a .fit() every single step and that too of value 1. And we train neural networks
@@ -95,3 +98,8 @@ class DQNAgent:
     
     def update_replay_memory(self, transition):
         self.replay_memory.append(transition)
+
+    def get_qa(self, state, step):
+        return self.model_predeict(np.array(state).reshape(-1, *state.shape) / 255)[0]      # to normalize the RGB image data that we are
+                                                                                            # passing, we divide by 255
+                        
