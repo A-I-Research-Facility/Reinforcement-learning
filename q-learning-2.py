@@ -1,3 +1,11 @@
+'''
+Progressing on what we developed in the previous program, this one deals with the 
+agent actually achieving its goal. 
+
+We create multiple episodes for our agent to learn. Also, use of epsilon and its functions
+are introduced here.
+'''
+
 import gym
 import numpy as np
 
