@@ -1,12 +1,12 @@
 '''
 This is a tutorial to create your own Q-learning environment. We need opencv for this, so 
-make sure to 'pip install it'. We also need a python imaging library, called pillow, so also
+make sure to 'pip install' it. We also need a python imaging library, called pillow, so also
 install that before starting. 
 
 This environment is like a snakes game with a slight modification. There is a player, represented
 as a blue blob, an enemy, represented as a red blob, and food, represented as a green blob.
 
-When the environment reders, we will see all these 3 blobs on a black background. When we start
+When the environment renders, we will see all these 3 blobs on a black background. When we start
 training, we will start to see results. Result analysis :
 1) If red and blue blob remain on sceen, means our agent got to the food
 2) If green and red blob remain, means our agent got to the enemy
@@ -31,7 +31,7 @@ FOOD_REWARD = 25
 
 epsilon = 0.9
 EPS_DECAY = 0.9998
-SHOW_EVERY = 3000
+SHOW_EVERY = 500
 
 LEARNING_RATE = 0.1
 DISCOUNT = 0.95
@@ -230,8 +230,8 @@ moving_avg = np.convolve(episode_rewards, np.ones((SHOW_EVERY, )) / SHOW_EVERY, 
 
 plt.plot([i for i in range(len(moving_avg))], moving_avg)
 plt.ylabel(f"Reward {SHOW_EVERY} mov_avg")
-plt.xlabel("Episode no.")
+plt.xlabel("Episode")
 plt.show()
 
-with open(f"qtable-{int(time.time())}.pickle", "wb") as f:
+with open(f"qt-{int(time.time())}.pickle", "wb") as f:
     pickle.dump(q_table, f)
