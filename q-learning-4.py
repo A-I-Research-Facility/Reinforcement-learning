@@ -154,4 +154,9 @@ for episode in range(HM_EPISODES):
         else:
             action = np.random.randint(0, 4)
         
-        player.action()
+        player.action(action)
+        '''
+        Later, we might wanna make the enemy and the food move. For that, use the commands below :
+        enemy.move()
+        food.move()
+        '''
