@@ -29,7 +29,7 @@ MINIBATCH_SIZE = 64     # batch size for training data
 DISCOUNT = 0.99
 UPDATE_TARGET_EVERY = 5
 MIN_REWARD = -200
-EPISODES = 50        # 20_000
+EPISODES = 20_000
 
 epsilon = 1
 EPSILON_DECAY = 0.99975
