@@ -1,6 +1,7 @@
 '''
 In continuation with the previous program, we are now going to train
 our DQN model.
+TensorFloe version = 2.4.1 used
 '''
 
 import tensorflow as tf
@@ -79,15 +80,15 @@ class Blob:
         elif choice == 8:
             self.move(x=0, y=0)
 
-    def move(self, x=False, y=False):
+    def move(self, x = None, y = None):         # updated for TensorFlow 2.4.1
         # If no value for x, move randomly
-        if not x:
+        if x == None:
             self.x += np.random.randint(-1, 2)
         else:
             self.x += x
 
         # If no value for y, move randomly
-        if not y:
+        if y == None:
             self.y += np.random.randint(-1, 2)
         else:
             self.y += y
@@ -195,10 +196,11 @@ if not os.path.isdir('models'):
     os.makedirs('models')
 
 class ModifiedTensorBoard(TensorBoard):
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs):             # updated for TensorFlow 2.4.1
         super().__init__(**kwargs)
         self.step = 1
-        self.writer = tf.summary.FileWriter(self.log_dir)
+        self.writer = tf.summary.create_file_writer(self.log_dir)
+        self._log_write_dir = self.log_dir
 
     def set_model(self, model):
         pass
@@ -212,8 +214,11 @@ class ModifiedTensorBoard(TensorBoard):
     def on_train_end(self, _):
         pass
 
-    def update_stats(self, **stats):
-        self._write_logs(stats, self.step)
+    def update_stats(self, **stats):        # updated for TensorFlow 2.4.1
+        with self.writer.as_default():
+            for key, value in stats.items():
+                tf.summary.scalar(key, value, step = self.step)
+                self.writer.flush()
 
 class DQNAgent:
     def __init__(self):
@@ -322,7 +327,7 @@ for episode in tqdm(range(1, EPISODES + 1), ascii = True, unit = "episode"):
         else:
             action = np.random.randint(0, env.ACTION_SPACE_SIZE)
 
-        new_state_reward, done = env.step(action)
+        new_state, reward, done = env.step(action)
 
         episode_reward += reward
 
