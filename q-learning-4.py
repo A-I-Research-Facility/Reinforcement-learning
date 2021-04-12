@@ -120,7 +120,8 @@ if start_q_table is None:
     (x1, y1), (x2, y2)
     So, to iterate through every possibility, we need 4 nested FOR loops.
     '''
-    # for i in range(-SIZE + 1, SIZE):
-    #     for i in range(-SIZE + 1, SIZE):
-    #         for i in range(-SIZE + 1, SIZE):
-    #             for i in range(-SIZE + 1, SIZE):
+    for x1 in range(-SIZE + 1, SIZE):
+        for y1 in range(-SIZE + 1, SIZE):
+            for x2 in range(-SIZE + 1, SIZE):
+                for y2 in range(-SIZE + 1, SIZE):
+                    q_table[((x1, y1), (x2, y2))] = [np.random.uniform(-5, 0) for i in range(4)]
