@@ -2,10 +2,12 @@
 This is a tutorial to create your own Q-learning environment. We need opencv for this, so 
 make sure to 'pip install it'. We also need a python imaging library, called pillow, so also
 install that before starting. 
+
+This environment is like a snakes game with a slight modification.
 '''
 
 import numpy as np
-import PIL as Image
+from PIL import Image as Img
 import cv2
 import matplotlib.pyplot as plt
 import pickle
@@ -183,12 +185,12 @@ for episode in range(HM_EPISODES):
         elif reward == -ENEMY_PENALTY:
             new_q = -ENEMY_PENALTY
         else:
-            new_q = (1 - LEARNING_RATE) * cuurent_q + LEARNING_RATE * (reward + DISCOUNT * max_future_q)
+            new_q = (1 - LEARNING_RATE) * current_q + LEARNING_RATE * (reward + DISCOUNT * max_future_q)
 
         q_table[obs][action] = new_q
 
         '''
-        Now, we are done with the Q-leaarning. We now want to see the environment and track the metrics
+        Now, we are done with the Q-learning. We now want to see the environment and track the metrics
         '''
         if show:
             env = np.zeros((SIZE, SIZE, 3), dtype = np.uint8)   # this is all zeros so it is a black environment for now
@@ -200,7 +202,7 @@ for episode in range(HM_EPISODES):
             For now, we have a coloured grid, but it is still just a 10 x 10 grid.
             We want to make it an image now.
             '''
-            img = Image.fromarray(env, "RGB")       # even though we are saying RGB here, it still defines as BGR. That is why
+            img = Img.fromarray(env, "RGB")       # even though we are saying RGB here, it still defines as BGR. That is why
                                                     # we defined the colours in BGR format in the beginning.
             img = img.resize((300, 300))
             cv2.imshow("", np.array(img))
@@ -221,8 +223,8 @@ for episode in range(HM_EPISODES):
 moving_avg = np.convolve(episode_rewards, np.ones((SHOW_EVERY, )) / SHOW_EVERY, mode = "valid")
 
 plt.plot([i for i in range(len(moving_avg))], moving_avg)
-plt.ylabel(f"reward {SHOW_EVERY}ma")
-plt.xlabel("episode #")
+plt.ylabel(f"Reward {SHOW_EVERY} mov_avg")
+plt.xlabel("Episode no.")
 plt.show()
 
 with open(f"qtable-{int(time.time())}.pickle", "wb") as f:
