@@ -64,7 +64,8 @@ class DQNAgent:
     def __init__(self):
         '''
         The model is expected to go crazy in the beginning of the learning process. Hence, 
-        we create 2 models, to ease our understanding, and deal with far less complications
+        we create 2 models, to ease our understanding, and deal with far less complications.
+        The self.model will change in a drastic manner, the other one, not so much.
         '''
         self.model = self.create_model()        # main model, gets trained every step
 
@@ -99,7 +100,7 @@ class DQNAgent:
     def update_replay_memory(self, transition):
         self.replay_memory.append(transition)
 
-    def get_qa(self, state, step):
+    def get_qs(self, state, step):
         return self.model_predeict(np.array(state).reshape(-1, *state.shape) / 255)[0]      # to normalize the RGB image data that we are
                                                                                             # passing, we divide by 255
                         
