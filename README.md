@@ -78,7 +78,7 @@ Q-Learning is also known as "Model free learning" because the learning algorithm
 <br>
 <br>
 The Q-learning formula : <br>
-<img align="left" alt="q-learning" width="1000px" src="https://miro.medium.com/max/2844/1*VItpGaVoIUnh0RUEArqSGQ.png">
+<img align="left" alt="q-learning" width="900px" src="https://miro.medium.com/max/2844/1*VItpGaVoIUnh0RUEArqSGQ.png">
 <br>
 <br>
 <br>
