@@ -3,7 +3,13 @@ This is a tutorial to create your own Q-learning environment. We need opencv for
 make sure to 'pip install it'. We also need a python imaging library, called pillow, so also
 install that before starting. 
 
-This environment is like a snakes game with a slight modification.
+This environment is like a snakes game with a slight modification. There is a player, represented
+as a blue blob, an enemy, represented as a red blob, and food, represented as a green blob.
+
+When the environment reders, we will see all these 3 blobs on a black background. When we start
+training, we will start to see results. Result analysis :
+1) If red and blue blob remain on sceen, means our agent got to the food
+2) If green and red blob remain, means our agent got to the enemy
 '''
 
 import numpy as np
