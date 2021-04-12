@@ -105,6 +105,8 @@ Or -
 
     sudo python3 -m pip install pyglet
 
-
+<br>
+An example models directory and a logs directory has been attached for reference.<br>
+<br>
 
 This tutorial is complete. Be sure to check out other ones too. Enjoy!!!
