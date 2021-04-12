@@ -199,8 +199,11 @@ tf.random.set_seed(1)
 if not os.path.isdir('models'):
     os.makedirs('models')
 
-class ModifiedTensorBoard(TensorBoard):
-    def __init__(self, **kwargs):             # updated for TensorFlow 2.4.1
+class ModifiedTensorBoard(TensorBoard):     # completely updated to work with TensorFlow 2.4.1
+                                            # Please do not change this class in any manner
+                                            # or the program may not work at all. If you face some
+                                            # issue regarding this class, please create a pull request.
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.step = 1
         self.writer = tf.summary.create_file_writer(self.log_dir)
@@ -226,7 +229,7 @@ class ModifiedTensorBoard(TensorBoard):
     def on_train_end(self, _):
         pass
 
-    def update_stats(self, **stats):        # updated for TensorFlow 2.4.1
+    def update_stats(self, **stats):
         with self.writer.as_default():
             for key, value in stats.items():
                 tf.summary.scalar(key, value, step = self.step)
