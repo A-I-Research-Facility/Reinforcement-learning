@@ -35,7 +35,7 @@ epsilon = 1
 EPSILON_DECAY = 0.99975
 MIN_EPSILON = 0.001
 
-AGGREGATE_STATS_EVERY = 10     # number of episodes to see stats = 100
+AGGREGATE_STATS_EVERY = 100     # number of episodes to see stats = 100
 SHOW_PREVIEW = False
 
 '''
