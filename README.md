@@ -11,6 +11,7 @@ For any query, please reach us at cserveairf@gmail.com or create a pull request 
 
 ***
 
+## Topics
 This is a guide to help users get started with reinforcement learning. It will cover the following topics :
 <br>
 <br>
@@ -31,6 +32,12 @@ Types of machine learning :<br>
   ✳️ Unsupervised<br>
   ✳️ Reinforcement<br>
 <br>
+
+<br/>
+<div align="right">
+    <b><a href="#-topics">⬆️ Back to Top</a></b>
+</div>
+<br/>
 
 ## 🟧 Understanding Reinforcement Learning
 Reinforcement means encouraging a pattern or behaviour. This form of ML is a _hit and trial_ method, because the model is new to the surroundings. The only way to learn is to experience and then, learn from that experience. 
