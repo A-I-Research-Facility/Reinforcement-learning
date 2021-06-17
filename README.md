@@ -9,8 +9,6 @@
 ### Contact us :
 For any query, please reach us at cserveairf@gmail.com or create a pull request regarding your issue.
 
-***
-
 ## Topics
 This is a guide to help users get started with reinforcement learning. It will cover the following topics :
 <br>
@@ -35,7 +33,7 @@ Types of machine learning :<br>
 
 <br/>
 <div align="right">
-    <b><a href="#-topics">⬆️ Back to Top</a></b>
+    <b><a href="#Topics">⬆️ Back to Top</a></b>
 </div>
 <br/>
 
