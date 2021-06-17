@@ -19,7 +19,7 @@ This is a guide to help users get started with reinforcement learning. It will c
   ♦️ [How does the learning process works](#-how-does-the-learning-process-works)<br>
   ♦️ [Concepts of reinforcement learning](#-concepts-of-reinforcement-learning)<br>
   ♦️ [Understanding the Markov decision process](#-understanding-markov-decision-process)<br>
-  ♦️ [Implementation of Q-learning algorithm]()<br>
+  ♦️ [Implementation of Q-learning algorithm](#-implementation-of-the-q-learning-algorithm)<br>
 ***
 <br>
 
