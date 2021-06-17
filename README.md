@@ -17,7 +17,7 @@ This is a guide to help users get started with reinforcement learning. It will c
   ♦️ [Introduction and types of machine learning](#-introduction-and-types-of-machine-learning)<br>
   ♦️ [Understanding reinforcement learning](#-understanding-reinforcement-learning)<br>
   ♦️ [How does the learning process works](#-how-does-the-learning-process-works)<br>
-  ♦️ [Concepts of reinforcement learning]()<br>
+  ♦️ [Concepts of reinforcement learning](#-concepts-of-reinforcement-learning)<br>
   ♦️ [Understanding the Markov decision process]()<br>
   ♦️ [Implementation of Q-learning algorithm]()<br>
 ***
