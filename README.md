@@ -29,7 +29,6 @@ Types of machine learning :<br>
   ✳️ Supervised<br>
   ✳️ Unsupervised<br>
   ✳️ Reinforcement<br>
-<br>
 
 <br/>
 <div align="right">
@@ -47,23 +46,35 @@ It is to be noted that 'training' datasets are not present here. Neither the fed
 :atom: **Consider an analogy** Let's suppose a baby is learning to walk towards a box of chocolates. The box acts as reward. 2 things can happen here.<br>
 First, the baby starts walking and makes it to the box. This result is positive since the goal is achived, and hence the baby is rewarded.<br>
 Second, it starts walking but falls due to some obstacle. This is a negative result. Not only the goal isn't achieved, but the baby also got hurt. Hence, we can say that baby is punished.
-<br>
-<br>
+
+<br/>
+<div align="right">
+    <b><a href="#Topics">⬆️ Back to Top</a></b>
+</div>
+<br/>
 
 ## 🟧 How does the learning process works
 There are 2 main components of the process, the learing agent, and the environment. The environment, just like in the real world, determines all parameters of larning. In programming, we call that _algorithm_.
 
 The process starts when environment sends a **state** to the agent. The agent then takes an action on it. Based on the action taken by the agent, the environment sends the next **state** and the respective reward to the agent. The agent then updates its knowledge based on the reward and evalutes its previous action on it.<br>
 This goes on and on till the environment sends a terminal state. 
-<br>
-<br>
+
+<br/>
+<div align="right">
+    <b><a href="#Topics">⬆️ Back to Top</a></b>
+</div>
+<br/>
 
 ## 🟧 Concepts of reinforcement learning
   ⚛️ Reward Maximisation : The agent must be trained in a way, that it takes the _best_ action in order to maximise the reward
   
   ⚛️ Exploration and Exploitation : The agent explores and captures more information about the environment, and then uses that information to highten the rewards
-<br>
-<br>
+
+<br/>
+<div align="right">
+    <b><a href="#Topics">⬆️ Back to Top</a></b>
+</div>
+<br/>
 
 ## 🟧 Understanding Markov decision process
 This process is a mathematical approach for mapping a solution in reinforcement learning. It can be assumed that, the purpose of reinforcement learning is to solve a Markov decision process. There are a certain number of parameters to get to the solution. They include :<br>
@@ -74,8 +85,12 @@ This process is a mathematical approach for mapping a solution in reinforcement 
   ☑️ Value (V)<br>
   
 The series of actions taken by the agent throughout the process, defines the _policy_. And the collectionof rewards recieved defines the _value_. The goal is to maximise the rewards by choosing the optimum policy.
-<br>
-<br>
+
+<br/>
+<div align="right">
+    <b><a href="#Topics">⬆️ Back to Top</a></b>
+</div>
+<br/>
 
 ## 🟧 Implementation of the Q-learning algorithm
 The idea of Q-learning, is to have "Q-values" for every action that a model takes, given a state. These values need to be updated overtime in such a way, that after a course of actions, _good_ result is produced. It is done by "Rewarding" the agent.<br>
@@ -115,3 +130,9 @@ An example models directory and a logs directory has been attached for reference
 <br>
 
 This tutorial is complete. Be sure to check out other ones too. Enjoy!!!
+
+<br/>
+<div align="right">
+    <b><a href="#Topics">⬆️ Back to Top</a></b>
+</div>
+<br/>
