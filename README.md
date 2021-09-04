@@ -53,7 +53,7 @@ Second, it starts walking but falls due to some obstacle. This is a negative res
 </div>
 <br/>
 
-## 🟧 How does the learning process works
+## 🟧 How does the learning process works?
 There are 2 main components of the process, the learing agent, and the environment. The environment, just like in the real world, determines all parameters of larning. In programming, we call that _algorithm_.
 
 The process starts when environment sends a **state** to the agent. The agent then takes an action on it. Based on the action taken by the agent, the environment sends the next **state** and the respective reward to the agent. The agent then updates its knowledge based on the reward and evalutes its previous action on it.<br>
