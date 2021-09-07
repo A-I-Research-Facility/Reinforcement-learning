@@ -4,10 +4,10 @@
 
 ⚠️ Warning : This guide deals deep Q-Learning after a certain point and so the python codes are written assuming that anyone following this is familiar with basic python programming, how to develop models, and matrices manipulation, etc. If you are not upto date on the concepts, please refresh them before jumping in the code. The README, on the other hand, is written very thorougly, explaining all concepts from beginning, and can be easily followed by anyone.
 
-***
-
 ### Contact us :
 For any query, please reach us at cserveairf@gmail.com or create a pull request regarding your issue.
+<br>
+<br>
 
 ## Topics
 This is a guide to help users get started with reinforcement learning. It will cover the following topics :
@@ -24,7 +24,6 @@ This is a guide to help users get started with reinforcement learning. It will c
   ♦️ [Understanding the Markov decision process](#-understanding-markov-decision-process)<br>
   
   ♦️ [Implementation of Q-learning algorithm](#-implementation-of-the-q-learning-algorithm)<br>
-***
 <br>
 
 ## 🟧 Introduction and types of Machine Learning
