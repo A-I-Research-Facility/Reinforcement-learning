@@ -30,11 +30,12 @@ This is a guide to help users get started with reinforcement learning. It will c
 The ability of a machine to learn and improve from experience rather than explicit programming is termed as machine learning.
 
 Types of machine learning :<br>
-  ✳️ Supervised<br>
+
+   ✳️ Supervised<br>
   
-  ✳️ Unsupervised<br>
+   ✳️ Unsupervised<br>
   
-  ✳️ Reinforcement<br>
+   ✳️ Reinforcement<br>
 
 <br/>
 <div align="right">
