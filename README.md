@@ -31,7 +31,9 @@ The ability of a machine to learn and improve from experience rather than explic
 
 Types of machine learning :<br>
   ✳️ Supervised<br>
+  
   ✳️ Unsupervised<br>
+  
   ✳️ Reinforcement<br>
 
 <br/>
