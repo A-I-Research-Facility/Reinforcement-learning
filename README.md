@@ -2,6 +2,10 @@
 
 <br>
 
+⚠️ Tutorial refinement in progress. Some codes and guides might look weird. Give us some days to make it right.
+
+<br>
+
 ⚠️ Warning : This guide deals deep Q-Learning after a certain point and so the python codes are written assuming that anyone following this is familiar with basic python programming, how to develop models, and matrices manipulation, etc. If you are not upto date on the concepts, please refresh them before jumping in the code. The README, on the other hand, is written very thorougly, explaining all concepts from beginning, and can be easily followed by anyone.
 
 ### Contact us :
