@@ -12,17 +12,18 @@ it because of its simplicity.
 
     import gym
 
-    env = gym.make("MountainCar-v0")    # this creates an environment with a mountain, and a car
-    
+Creating an environment with mountain and a car :-
+
+    env = gym.make("MountainCar-v0")
     env.reset()     
 
-***
-💢 Resetting is the first thing to do after we create an environment
+Resetting is the first thing to do after we create an environment
 Then we are ready to iterate through it.
 
-    done = False
+***
+💢 This environment has three actions, 0 = push car left, 1 = do nothing, 2 = push car right
 
-This environment has three actions, 0 = push car left, 1 = do nothing, 2 = push car right
+    done = False
 
     while not done:
         action = 2
