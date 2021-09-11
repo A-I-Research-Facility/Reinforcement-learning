@@ -1,12 +1,3 @@
-'''
-In the previous program, our agent achieved its target. Now, we want
-to measure the metrics of its achievements. This will help us select the best
-Q-table for training a model under given circumstances.
-
-In this program, we measure all the important metrics like episode number, 
-trailing average, and finally plot a graph using matplotlib.
-'''
-
 import gym
 import numpy as np
 import matplotlib.pyplot as plt
@@ -29,11 +20,6 @@ END_EPSILON_DECAYING = EPISODES // 2
 epsilon_decay_value = epsilon / (END_EPSILON_DECAYING - START_EPSILON_DECAYING)
 
 q_table = np.random.uniform(low = -2, high = 0, size = (DISCRETE_OS_SIZE + [env.action_space.n]))
-
-'''
-Now, we want to track all the metrics over time. How can we do that? Well, it's a simple
-programming task. We need to create some lists, and dictionaries, and then we will be good to go.
-'''
 
 ep_rewards = []
 aggr_ep_rewards = {'ep' : [], 'avg' : [], 'min' : [], 'max' : []}       # track episode number, trailing average, worst model for
@@ -88,10 +74,6 @@ for episode in range(EPISODES):
     ep_rewards.append(episode_reward)
 
     if not episode % SHOW_EVERY:
-        '''
-        To save the Q-tables, create a qtables directory, and use the following
-        command. It will save the Q-table of every render.
-        '''
         # np.save(f"qtables/{episode}-qtable.npy", q_table)
         average_reward = sum(ep_rewards[-SHOW_EVERY:]) / len(ep_rewards[-SHOW_EVERY:])
         aggr_ep_rewards['ep'].append(episode)
