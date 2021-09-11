@@ -65,38 +65,49 @@ and we want more than that.
 
         # print(discrete_state)       # Output : (7,  10) {could be anything}
 
-    '''
-    We can now lookup that discrete state in the Q-table, and find the maximum Q-value
-    print(np.argmax(q_table[discrete_state]))
 
-    Since now we are ready with our new discrete state, our model can take action, and start generating
-    new Q-table.
-    We now require the while loop from previous program, but instead of hardcoded values, we will use dynamic values
-    '''
+   We can now lookup that discrete state in the Q-table, and find the maximum Q-value.
+    
+    # print(np.argmax(q_table[discrete_state]))
+
+   ***
+   💢 Since now we are ready with our new discrete state, our model can take action, and start generating
+   new Q-table.
+   <br>
+   
+   We now require the while loop from previous program, but instead of hardcoded values, we will use dynamic values.
 
     done = False
 
     while not done:
         if np.random.random() > epsilon:
-            action = np.argmax(q_table[discrete_state])     # we will have new discrete state soon
+        
+   We will have new discrete state soon :
+   
+            action = np.argmax(q_table[discrete_state])
         else:
             action = np.random.randint(0, env.action_space.n)
+            
         new_state, reward, done, _ = env.step(action)
         new_discrete_state = get_discrete_state(new_state)
+        
         if render:
             env.render()
         
-        # The environment might be over already, but if it is not
+   The environment might be over already, but if it is not, we use the following command. We use np.max() instead of argmax() beacuse we will use
+   max_future_q in our new Q formula, so we want the Q-value instead of the argument. Slowly overtime, Q-value gets back propagated down the table.
+   
         if not done:
-            max_future_q = np.max(q_table[new_discrete_state])      # we use np.max() instead of argmax() beacuse we will use 
-                                                                    # max_future_q in our new Q formula, so we want the Q-value
-                                                                    # instead of the argument.
-                                                                    # Slowly overtime, Q-value gets back propagated down the table
+            max_future_q = np.max(q_table[new_discrete_state])
 
-            # Finding the current Q-value
+   <br>
+   Finding the current Q-value :
+   
             current_q = q_table[discrete_state + (action, )]
 
-            # The new Q-formula
+   <br>
+   The new Q-formula :
+   
             new_q = (1 - LEARNING_RATE) * current_q + LEARNING_RATE * (reward + DISCOUNT * max_future_q)    # The way Q-value back propagates is based
                                                                                                             # on all the parameters of this formula
             q_table[discrete_state + (action, )] = new_q        # updating the Q-table based on the newest Q-value
