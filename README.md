@@ -149,6 +149,7 @@ Now, you should go and check the following directories for programs based on rei
 5) [Q learning 5]()
 6) [Q learning 6]()
 
+<br>
 This tutorial is complete. Be sure to check out other ones too. Enjoy!!!
 
 <br/>
