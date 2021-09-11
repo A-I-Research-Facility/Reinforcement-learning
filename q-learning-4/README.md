@@ -108,7 +108,7 @@ We want to avoid all the above scenarios. But since we are making a very simple 
 This can attain the value 0, hence random movement can be up-down :
 
         if not x:
-            self.x += np.random.randint(-1, 2)  # this can attain value 0, so this random movement can be up down
+            self.x += np.random.randint(-1, 2)
         else:
             self.x += x
 This can also attain the value 0 :
