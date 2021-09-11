@@ -102,26 +102,24 @@ We want to avoid all the above scenarios. But since we are making a very simple 
                 self.move(x = 1, y = -1)
 
 ***
-
+💢 We should be able to move randomly if 'not' value is passed, or very specifically otherwise :
+    
     def move(self, x = False, y = False):
-        '''
-        We wanna be able to move randomly if not value is passed,
-        or very specifically otherwise.
-        '''
+This can attain the value 0, hence random movement can be up-down :
+
         if not x:
             self.x += np.random.randint(-1, 2)  # this can attain value 0, so this random movement can be up down
         else:
             self.x += x
+This can also attain the value 0 :
 
         if not y:
-            self.y += np.random.randint(-1, 2)  # this can attain value 0, so this random movement can be up down
+            self.y += np.random.randint(-1, 2)
         else:
             self.y += y
-        
-        '''
-        Remember that we are making a 10 x 10 grid. We need to create movement boundaries for
-        our agent.
-        '''
+
+Since we are creating a 10 x 10 grid, we need to create movement boundaries for our agent :
+
         if self.x < 0:
             self.x = 0
         elif self.x > SIZE - 1:
@@ -132,120 +130,128 @@ We want to avoid all the above scenarios. But since we are making a very simple 
         elif self.y > SIZE - 1:
             self.y = SIZE - 1
 
-'''
-We are finished with our blob class. Now, we either want to create a Q-table, or load an existing one.
-'''
-if start_q_table is None:
-    q_table = {}
-    '''
-    Our observation space will look like :
-    (x1, y1), (x2, y2)
-    So, to iterate through every possibility, we need 4 nested FOR loops.
-    '''
-    for x1 in range(-SIZE + 1, SIZE):
-        for y1 in range(-SIZE + 1, SIZE):
-            for x2 in range(-SIZE + 1, SIZE):
-                for y2 in range(-SIZE + 1, SIZE):
-                    q_table[((x1, y1), (x2, y2))] = [np.random.uniform(-5, 0) for i in range(4)]
-else:
-    with open(start_q_table, "rb") as f:
-        q_table = pickle.load(f)
+***
+💢 We are finished with our blob class. Now, we either want to create a Q-table, or load an existing one.
 
-'''
-Now, we have our training to do.
-'''
-episode_rewards = []
+Also, our observation space will look like :<br>
+    
+(x1, y1), (x2, y2)
 
-for episode in range(HM_EPISODES):
-    player = Blob()
-    food = Blob()
-    enemy = Blob()
+So, to iterate through every possibility, we need 4 nested FOR loops.
 
-    if episode % SHOW_EVERY == 0:
-        print(f"on # {episode}, epsilon : {epsilon}")
-        print(f"{SHOW_EVERY} ep mean {np.mean(episode_rewards[-SHOW_EVERY:])}")
-        show = True
-    else:
-        show = False
-
-    episode_reward = 0
-
-    for i in range(200):
-        obs = (player - food, player - enemy)   # Operator overloading
-        if np.random.random() > epsilon:
-            action = np.argmax(q_table[obs])
-        else:
-            action = np.random.randint(0, 4)
+    if start_q_table is None:
+        q_table = {}
         
-        player.action(action)
-        '''
-        Later, we might wanna make the enemy and the food move. For that, use the commands below :
+        for x1 in range(-SIZE + 1, SIZE):
+            for y1 in range(-SIZE + 1, SIZE):
+                for x2 in range(-SIZE + 1, SIZE):
+                    for y2 in range(-SIZE + 1, SIZE):
+                        q_table[((x1, y1), (x2, y2))] = [np.random.uniform(-5, 0) for i in range(4)]
+    else:
+        with open(start_q_table, "rb") as f:
+            q_table = pickle.load(f)
+
+***
+💢 We shall begin our training now.
+
+    episode_rewards = []
+
+    for episode in range(HM_EPISODES):
+        player = Blob()
+        food = Blob()
+        enemy = Blob()
+
+        if episode % SHOW_EVERY == 0:
+            print(f"on # {episode}, epsilon : {epsilon}")
+            print(f"{SHOW_EVERY} ep mean {np.mean(episode_rewards[-SHOW_EVERY:])}")
+            show = True
+        else:
+            show = False
+
+        episode_reward = 0
+
+        for i in range(200):
+            obs = (player - food, player - enemy)   # Operator overloading
+            if np.random.random() > epsilon:
+                action = np.argmax(q_table[obs])
+            else:
+                action = np.random.randint(0, 4)
+        
+            player.action(action)
+        
+Later, we might wanna make the enemy and the food move. For that, use the commands below :
         enemy.move()
         food.move()
         But for training purposes now, it is better to not let them move initially in order to keep
         things simple.
         
-        Now, assigning the rewards to actions
-        '''
-        if player.x == enemy.x and player.y == enemy.y:
-            reward = -ENEMY_PENALTY
-        elif player.x == food.x and player.y == food.y:
-            reward = FOOD_REWARD
-        else:
-            reward = -MOVE_PENALTY
+Now, assigning the rewards to actions :
         
-        # To make our Q function, we need to be able to make a new observation based on the movement
-        new_obs = (player - food, player - enemy)
-        max_future_q = np.max(q_table[new_obs])
-        current_q = q_table[obs][action]
-
-        # Now we are ready to calculate our Q-function
-        if reward == FOOD_REWARD:
-            new_q = FOOD_REWARD
-        elif reward == -ENEMY_PENALTY:
-            new_q = -ENEMY_PENALTY
-        else:
-            new_q = (1 - LEARNING_RATE) * current_q + LEARNING_RATE * (reward + DISCOUNT * max_future_q)
-
-        q_table[obs][action] = new_q
-
-        '''
-        Now, we are done with the Q-learning. We now want to see the environment and track the metrics
-        '''
-        if show:
-            env = np.zeros((SIZE, SIZE, 3), dtype = np.uint8)   # this is all zeros so it is a black environment for now
-            env[food.y][food.x] = d[FOOD_N]     # if we add multiple foods, the dictionary method is a big help
-            env[player.y][player.x] = d[PLAYER_N]
-            env[enemy.y][enemy.x] = d[ENEMY_N]
-
-            '''
-            For now, we have a coloured grid, but it is still just a 10 x 10 grid.
-            We want to make it an image now.
-            '''
-            img = Img.fromarray(env, "RGB")       # even though we are saying RGB here, it still defines as BGR. That is why
-                                                    # we defined the colours in BGR format in the beginning.
-            img = img.resize((300, 300))
-            cv2.imshow("", np.array(img))
-            if reward == FOOD_REWARD or reward == -ENEMY_PENALTY:
-                if cv2.waitKey(500) & 0xFF == ord("q"):
-                    break
+            if player.x == enemy.x and player.y == enemy.y:
+                reward = -ENEMY_PENALTY
+            elif player.x == food.x and player.y == food.y:
+                reward = FOOD_REWARD
             else:
-                if cv2.waitKey(1) & 0xFF == ord("q"):
-                    break
+                reward = -MOVE_PENALTY
 
-        episode_reward += reward
-        if reward == FOOD_REWARD or reward == -ENEMY_PENALTY:
-            break
+***
+💢 To make our Q function, we need to be able to make a new observation based on the movement :
 
-    episode_rewards.append(episode_reward)
-    epsilon *= EPS_DECAY
+            new_obs = (player - food, player - enemy)
+            max_future_q = np.max(q_table[new_obs])
+            current_q = q_table[obs][action]
+***
+💢 Now we are ready to calculate our Q-function :
 
-moving_avg = np.convolve(episode_rewards, np.ones((SHOW_EVERY, )) / SHOW_EVERY, mode = "valid")
+            if reward == FOOD_REWARD:
+                new_q = FOOD_REWARD
+            elif reward == -ENEMY_PENALTY:
+                new_q = -ENEMY_PENALTY
+            else:
+                new_q = (1 - LEARNING_RATE) * current_q + LEARNING_RATE * (reward + DISCOUNT * max_future_q)
 
-plt.plot([i for i in range(len(moving_avg))], moving_avg)
-plt.ylabel(f"Reward {SHOW_EVERY} mov_avg")
-plt.xlabel("Episode")
-plt.show()
+            q_table[obs][action] = new_q
 
-with open(f"qt-{int(time.time())}.pickle", "wb") as f:
-    pickle.dump(q_table, f)
+
+Now, we are done with the Q-learning. We now want to see the environment and track the metrics
+
+            if show:
+                env = np.zeros((SIZE, SIZE, 3), dtype = np.uint8)   # this is all zeros so it is a black environment for now
+                env[food.y][food.x] = d[FOOD_N]     # if we add multiple foods, the dictionary method is a big help
+                env[player.y][player.x] = d[PLAYER_N]
+                env[enemy.y][enemy.x] = d[ENEMY_N]
+
+
+For now, we have a coloured grid, but it is still just a 10 x 10 grid.
+            We want to make it an image now.
+            
+                img = Img.fromarray(env, "RGB")       # even though we are saying RGB here, it still defines as BGR. That is why
+                                                    # we defined the colours in BGR format in the beginning.
+                img = img.resize((300, 300))
+                cv2.imshow("", np.array(img))
+                if reward == FOOD_REWARD or reward == -ENEMY_PENALTY:
+                    if cv2.waitKey(500) & 0xFF == ord("q"):
+                        break
+                else:
+                    if cv2.waitKey(1) & 0xFF == ord("q"):
+                        break
+
+            episode_reward += reward
+            if reward == FOOD_REWARD or reward == -ENEMY_PENALTY:
+                break
+
+        episode_rewards.append(episode_reward)
+        epsilon *= EPS_DECAY
+
+    moving_avg = np.convolve(episode_rewards, np.ones((SHOW_EVERY, )) / SHOW_EVERY, mode = "valid")
+
+    plt.plot([i for i in range(len(moving_avg))], moving_avg)
+    plt.ylabel(f"Reward {SHOW_EVERY} mov_avg")
+    plt.xlabel("Episode")
+    plt.show()
+
+***
+💢 Saving our Q-table :
+
+    with open(f"qt-{int(time.time())}.pickle", "wb") as f:
+        pickle.dump(q_table, f)
