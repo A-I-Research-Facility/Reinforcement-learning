@@ -3,7 +3,10 @@
 We use the 'gym' library to open an environment called 'MountainCar-v0". It is
 a simple environment consisting of 2 hills, a car and a destination marked with a
 flag. The goal of our model will be to make the car reach the flag. The environment
-only allows 3 actions for the car : a) go left, b) go right, c) don't move
+only allows 3 actions for the car : <br>
+a) go left, <br>
+b) go right, <br>
+c) don't move
 
 This program serves as an introduction to Q-tables, how they are created, and used.
 
