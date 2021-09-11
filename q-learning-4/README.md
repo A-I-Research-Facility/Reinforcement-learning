@@ -180,12 +180,15 @@ So, to iterate through every possibility, we need 4 nested FOR loops.
             player.action(action)
         
 Later, we might wanna make the enemy and the food move. For that, use the commands below :
-        enemy.move()
-        food.move()
-        But for training purposes now, it is better to not let them move initially in order to keep
-        things simple.
-        
-Now, assigning the rewards to actions :
+
+    # enemy.move()
+    # food.move()
+    
+But for training purposes now, it is better to not let them move initially in order to keep
+things simple.
+
+***     
+💢 We need to assign the rewards to actions :
         
             if player.x == enemy.x and player.y == enemy.y:
                 reward = -ENEMY_PENALTY
@@ -201,7 +204,7 @@ Now, assigning the rewards to actions :
             max_future_q = np.max(q_table[new_obs])
             current_q = q_table[obs][action]
 ***
-💢 Now we are ready to calculate our Q-function :
+💢 Calculating our Q-function :
 
             if reward == FOOD_REWARD:
                 new_q = FOOD_REWARD
@@ -212,21 +215,27 @@ Now, assigning the rewards to actions :
 
             q_table[obs][action] = new_q
 
-
-Now, we are done with the Q-learning. We now want to see the environment and track the metrics
+***
+💢 The Q-learning part is over. We now want to see the environment and track the metrics :-
 
             if show:
-                env = np.zeros((SIZE, SIZE, 3), dtype = np.uint8)   # this is all zeros so it is a black environment for now
-                env[food.y][food.x] = d[FOOD_N]     # if we add multiple foods, the dictionary method is a big help
+Initially, we get a black environment because we initialize with all zeros :
+            
+                env = np.zeros((SIZE, SIZE, 3), dtype = np.uint8)
+If we want to add multiple foods, the dictionary method will help :
+                
+                env[food.y][food.x] = d[FOOD_N]
+                
                 env[player.y][player.x] = d[PLAYER_N]
                 env[enemy.y][enemy.x] = d[ENEMY_N]
-
-
-For now, we have a coloured grid, but it is still just a 10 x 10 grid.
-            We want to make it an image now.
+***
+💢 We get a coloured grid, but it is still just a 10 x 10 grid.
+We want to make it an image now.
             
-                img = Img.fromarray(env, "RGB")       # even though we are saying RGB here, it still defines as BGR. That is why
-                                                    # we defined the colours in BGR format in the beginning.
+Even though we define 'RGB' below, the image is still defined as 'BGR', this is the reason we defined colours in the 'BGR' format in the beginning :
+
+                img = Img.fromarray(env, "RGB")
+                
                 img = img.resize((300, 300))
                 cv2.imshow("", np.array(img))
                 if reward == FOOD_REWARD or reward == -ENEMY_PENALTY:
