@@ -30,7 +30,7 @@ epsilon over here. Even though in this case, our model is able to achive the goa
 this varible. Also, the value of epsilon varies between 0 and 1 only.
 
 Epsilon basically helps the model explore in random directions. It is suprising what the model finds
-out sometimes. The higher the epsilon, the more likely the model is to perform a random action
+out sometimes. The higher the epsilon, the more likely the model is to perform a random action.
 
     epsilon = 0.5
     START_EPSILON_DECAYING = 1
