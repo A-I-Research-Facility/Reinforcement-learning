@@ -2,7 +2,7 @@
 make sure to 'pip install' it. We also need a python imaging library, called pillow, so also
 install that before starting. 
 <br>
-
+<br>
 This environment is like a snakes game with a slight modification. There is a player, represented
 as a blue blob, an enemy, represented as a red blob, and food, represented as a green blob.
 When the environment renders, we will see all these 3 blobs on a black background. When we start
@@ -34,68 +34,74 @@ Making a 10 x 10 grid :
 Number of episodes :
 
     HM_EPISODES = 25000
-    
+
     MOVE_PENALTY = 1
     ENEMY_PENALTY = 300
     FOOD_REWARD = 25
 
-epsilon = 0.9
-EPS_DECAY = 0.9998
-SHOW_EVERY = 500
+    epsilon = 0.9
+    EPS_DECAY = 0.9998
+    SHOW_EVERY = 500
 
-LEARNING_RATE = 0.1
-DISCOUNT = 0.95
+    LEARNING_RATE = 0.1
+    DISCOUNT = 0.95
 
-PLAYER_N = 1
-FOOD_N = 2
-ENEMY_N = 3
+    PLAYER_N = 1
+    FOOD_N = 2
+    ENEMY_N = 3
 
-start_q_table = None    # We can add an existing Q-table by writing the full path here
+***
+💢 We can add an existing Q-table by writing the full path in place of 'None' :
 
-# Defining colour for our objects. This is in BGR format
-d = {1: (255, 175, 0),
-    2: (0, 255, 0),
-    3: (0, 0, 255)}
+    start_q_table = None
 
-'''
-Now we need a blob class. All the blobs have a lot of same attributes, like, movement directions,
+***
+💢 Defining colour for our objects. This is in BGR format.
+
+    d = {1: (255, 175, 0),
+        2: (0, 255, 0),
+        3: (0, 0, 255)}
+
+***
+💢 Now we need a blob class. All the blobs have a lot of same attributes, like, movement directions,
 starting locations, etc.
 We are defining observation in our environment as the relative location of food, and the relative
 location of the enemy. So, we need to create a blob class to handle all of the repeated things with ease.
-'''
 
-class Blob:
-    def __init__(self):
-        self.x = np.random.randint(0, SIZE)
-        self.y = np.random.randint(0, SIZE)
-        '''
-        Few things to note here that we want to avoid:
-        1) The player could spawn on the food;
-        2) Player could spawn on enemy;
-        3) Enemy could spawn on the food.
-        We want to avoid all the above scenarios. But since we are making a very simple
-        environment here, we won't worry about that for now.
-        '''
+    class Blob:
+        def __init__(self):
+            self.x = np.random.randint(0, SIZE)
+            self.y = np.random.randint(0, SIZE)
+            
+***
+💢 Few things to note here that we want to avoid:
+1) The player could spawn on the food;
+2) Player could spawn on enemy;
+3) Enemy could spawn on the food.
+<br>
 
-    def __str__(self):
-        return f"{self.x}, {self.y}"
+We want to avoid all the above scenarios. But since we are making a very simple environment here, we won't worry about that for now.
+
+        def __str__(self):
+            return f"{self.x}, {self.y}"
     
-    def __sub__(self, other):
-        return (self.x - other.x, self.y - other.y)
+        def __sub__(self, other):
+            return (self.x - other.x, self.y - other.y)
 
-    def action(self, choice):   # We are making this method to interact with another method in case we want to add more players
-        '''
-        The moves that we are coding here only allows diagonal movement. To make a blob go
-        up-down and side to side, add the codes for only x, and only y.
-        '''
-        if choice == 0:
-            self.move(x = 1, y = 1)
-        elif choice == 1:
-            self.move(x = -1, y = -1)
-        elif choice == 2:
-            self.move(x = -1, y = 1)
-        elif choice == 3:
-            self.move(x = 1, y = -1)
+***
+💢 We need to make a method that interacts with other methods in case we want to add more players. Note, the moves we are adding here only allow diagonal movement. To make a blob go up-down, or, side-to-side, add the codes for only x and only y.
+        
+        def action(self, choice):
+            if choice == 0:
+                self.move(x = 1, y = 1)
+            elif choice == 1:
+                self.move(x = -1, y = -1)
+            elif choice == 2:
+                self.move(x = -1, y = 1)
+            elif choice == 3:
+                self.move(x = 1, y = -1)
+
+***
 
     def move(self, x = False, y = False):
         '''
