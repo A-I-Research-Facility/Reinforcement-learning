@@ -11,7 +11,7 @@ training, we will start to see results. Result analysis :
 2) If green and red blob remain, means our agent got to the enemy
 <br>
 
-Interesting thing to note : We will restrict our agent's movement to diagonals only, so it
+🎨 Interesting thing to note : We will restrict our agent's movement to diagonals only, so it
 can't move up or down in a straight line. But, it will learn on its own, to use the boundaries
 of the grid (edges of the render window), even though it doesn't know about it, to correct 
 its direction and go to the required place.
