@@ -140,6 +140,15 @@ Or -
 An example models directory and a logs directory has been attached for reference.<br>
 <br>
 
+Now, you should go and check the following directories for programs based on reinforcement learning. All programs are daisy chained, so please go through them in sequence :<br>
+
+1) [Q learning 1]()
+2) [Q learning 2]()
+3) [Q learning 3]()
+4) [Q learning 4]()
+5) [Q learning 5]()
+6) [Q learning 6]()
+
 This tutorial is complete. Be sure to check out other ones too. Enjoy!!!
 
 <br/>
