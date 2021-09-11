@@ -77,48 +77,48 @@ and we want more than that.
    
    We now require the while loop from previous program, but instead of hardcoded values, we will use dynamic values.
 
-    done = False
+        done = False
 
-    while not done:
-        if np.random.random() > epsilon:
+        while not done:
+            if np.random.random() > epsilon:
         
    We will have new discrete state soon :
    
-            action = np.argmax(q_table[discrete_state])
-        else:
-            action = np.random.randint(0, env.action_space.n)
+                action = np.argmax(q_table[discrete_state])
+            else:
+                action = np.random.randint(0, env.action_space.n)
             
-        new_state, reward, done, _ = env.step(action)
-        new_discrete_state = get_discrete_state(new_state)
+            new_state, reward, done, _ = env.step(action)
+            new_discrete_state = get_discrete_state(new_state)
         
-        if render:
-            env.render()
+            if render:
+                env.render()
         
    The environment might be over already, but if it is not, we use the following command. We use np.max() instead of argmax() beacuse we will use
    max_future_q in our new Q formula, so we want the Q-value instead of the argument. Slowly overtime, Q-value gets back propagated down the table.
    
-        if not done:
-            max_future_q = np.max(q_table[new_discrete_state])
+            if not done:
+                max_future_q = np.max(q_table[new_discrete_state])
 
    Finding the current Q-value :
    
-            current_q = q_table[discrete_state + (action, )]
+                current_q = q_table[discrete_state + (action, )]
 
    The new Q-formula (The way Q-value back propagates is based on all the parameters of this formula) :
    
-            new_q = (1 - LEARNING_RATE) * current_q + LEARNING_RATE * (reward + DISCOUNT * max_future_q)     
+                new_q = (1 - LEARNING_RATE) * current_q + LEARNING_RATE * (reward + DISCOUNT * max_future_q)     
                                                                                                             
    Updating the Q-table based on the newest Q-value :
             
-            q_table[discrete_state + (action, )] = new_q
+                q_table[discrete_state + (action, )] = new_q
 
-        elif new_state[0] >= env.goal_position:
-            print(f"We made it on episode  {episode}")
-            q_table[discrete_state + (action, )] = 0
+            elif new_state[0] >= env.goal_position:
+                print(f"We made it on episode  {episode}")
+                q_table[discrete_state + (action, )] = 0
 
-        discrete_state = new_discrete_state
+            discrete_state = new_discrete_state
     
-    if END_EPSILON_DECAYING >= episode >= START_EPSILON_DECAYING:
-        epsilon -= epsilon_decay_value
+        if END_EPSILON_DECAYING >= episode >= START_EPSILON_DECAYING:
+            epsilon -= epsilon_decay_value
 
-    env.close()
+        env.close()
