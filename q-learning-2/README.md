@@ -87,8 +87,10 @@ and we want more than that.
                 action = np.argmax(q_table[discrete_state])
             else:
                 action = np.random.randint(0, env.action_space.n)
+                
             
             new_state, reward, done, _ = env.step(action)
+            
             new_discrete_state = get_discrete_state(new_state)
         
             if render:
@@ -111,10 +113,14 @@ and we want more than that.
    Updating the Q-table based on the newest Q-value :
             
                 q_table[discrete_state + (action, )] = new_q
+                
 
             elif new_state[0] >= env.goal_position:
-                print(f"We made it on episode  {episode}")
+                
+                print(f"We made it on episode {episode}")
+                
                 q_table[discrete_state + (action, )] = 0
+                
 
             discrete_state = new_discrete_state
     
