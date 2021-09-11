@@ -65,8 +65,9 @@ Q-values with time.
 💢 We want our Q-table to be of managable size. However, hardcoding the size is not the right move, since a real
 RL model would not have this hardcoded beacuse it will change with environment.
 
-    DISCRETE_OS_SIZE = [20] * len(env.observation_space.high) # 20 * the length of any random observation space thing = [20] * 2
+    DISCRETE_OS_SIZE = [20] * len(env.observation_space.high) 
 
+20 * the length of any random observation space thing = [20] * 2
 
 We are trying to separate the range of observation into 20 discrete chunks. Now we need to know the size of
 those chunks.
@@ -91,9 +92,9 @@ those chunks.
     
     q_table = np.random.uniform(low = -2, high = 0, size = (DISCRETE_OS_SIZE + [env.action_space.n]))   
     
-low = lowest value, high = highest value
-size = 3 dimensional table, thus having
+low = lowest value, <br>
+high = highest value<br>
+size = 3 dimensional table, <br>
+thus having a Q-value for every possible combination of actions.
     
     print(q_table.shape)
-
-A Q-value for every possible combination of actions.
