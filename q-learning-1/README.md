@@ -13,6 +13,7 @@ it because of its simplicity.
     import gym
 
     env = gym.make("MountainCar-v0")    # this creates an environment with a mountain, and a car
+    
     env.reset()     
 
 ***
@@ -22,10 +23,14 @@ Then we are ready to iterate through it.
     done = False
 
     while not done:
-        action = 2      # This environment has three actions, 0 = push car left, 1 = do nothing, 2 = push car right
-        new_state, reward, done, _ = env.step(action)   
+
+This environment has three actions, 0 = push car left, 1 = do nothing, 2 = push car right
+
+        action = 2
+
+        new_state, reward, done, _ = env.step(action)
         
-everytime we step through an action, we get a new_state from environment
+Everytime we step through an action, we get a new_state from environment
 For our sake of understanding, we know that the state returned by the 
 environment is position and velocity.
 Note : the states returned over her are continuous. We need to convert them
@@ -50,9 +55,11 @@ Q-values with time.
 ***
 💢 To check all observations and all possible actions, run following (only works in gym environments):
 
-    # print(env.observation_space.high)       # Output : [0.6     0.07]
-    # print(env.observation_space.low)        # Output : [-1.2     -0.07]
-    # print(env.action_space.n)               # Output : 3
+    # print(env.observation_space.high)     # Output : [0.6     0.07]
+
+    # print(env.observation_space.low)      # Output : [-1.2     -0.07]
+
+    # print(env.action_space.n)             # Output : 3
 
 ***
 💢 We want our Q-table to be of managable size. However, hardcoding the size is not the right move, since a real
@@ -81,7 +88,12 @@ those chunks.
 💢 Initialising the Q-table :
 
     import numpy as np
-    q_table = np.random.uniform(low = -2, high = 0, size = (DISCRETE_OS_SIZE + [env.action_space.n]))   # low = lowest value, high = highest value
-                                                                                                    # size = 3 dimensional table, thus having
-    print(q_table.shape)                                                                                # a Q-value for every possible combination
-                                                                                                    # of actions.
+    
+    q_table = np.random.uniform(low = -2, high = 0, size = (DISCRETE_OS_SIZE + [env.action_space.n]))   
+    
+low = lowest value, high = highest value
+size = 3 dimensional table, thus having
+    
+    print(q_table.shape)
+
+A Q-value for every possible combination of actions.
