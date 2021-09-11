@@ -100,17 +100,17 @@ and we want more than that.
         if not done:
             max_future_q = np.max(q_table[new_discrete_state])
 
-   <br>
    Finding the current Q-value :
    
             current_q = q_table[discrete_state + (action, )]
 
-   <br>
-   The new Q-formula :
+   The new Q-formula (The way Q-value back propagates is based on all the parameters of this formula) :
    
-            new_q = (1 - LEARNING_RATE) * current_q + LEARNING_RATE * (reward + DISCOUNT * max_future_q)    # The way Q-value back propagates is based
-                                                                                                            # on all the parameters of this formula
-            q_table[discrete_state + (action, )] = new_q        # updating the Q-table based on the newest Q-value
+            new_q = (1 - LEARNING_RATE) * current_q + LEARNING_RATE * (reward + DISCOUNT * max_future_q)     
+                                                                                                            
+   Updating the Q-table based on the newest Q-value :
+            
+            q_table[discrete_state + (action, )] = new_q
 
         elif new_state[0] >= env.goal_position:
             print(f"We made it on episode  {episode}")
@@ -121,4 +121,4 @@ and we want more than that.
     if END_EPSILON_DECAYING >= episode >= START_EPSILON_DECAYING:
         epsilon -= epsilon_decay_value
 
-env.close()
+    env.close()
