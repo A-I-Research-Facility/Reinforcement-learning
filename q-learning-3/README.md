@@ -85,12 +85,11 @@ We have to track episode number, trailing average, worst and best model for ever
     
         ep_rewards.append(episode_reward)
 
+To save the Q-tables, create a qtables directory, and use the following command. It will save the Q-table of every render.
+
         if not episode % SHOW_EVERY:
-        '''
-        To save the Q-tables, create a qtables directory, and use the following
-        command. It will save the Q-table of every render.
-        '''
             # np.save(f"qtables/{episode}-qtable.npy", q_table)
+            
             average_reward = sum(ep_rewards[-SHOW_EVERY:]) / len(ep_rewards[-SHOW_EVERY:])
             aggr_ep_rewards['ep'].append(episode)
             aggr_ep_rewards['avg'].append(average_reward)
