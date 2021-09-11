@@ -22,10 +22,9 @@ Then we are ready to iterate through it.
 
     done = False
 
-    while not done:
-
 This environment has three actions, 0 = push car left, 1 = do nothing, 2 = push car right
 
+    while not done:
         action = 2
 
         new_state, reward, done, _ = env.step(action)
