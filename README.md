@@ -5,7 +5,6 @@
 ### Contact us :
 For any query, please reach us at cserveairf@gmail.com or create a discussion!!!
 <br>
-<br>
 
 ## Topics
 This is a guide to help users get started with reinforcement learning. It will cover the following topics :
