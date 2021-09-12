@@ -28,9 +28,6 @@ MIN_EPSILON = 0.001
 AGGREGATE_STATS_EVERY = 100     # number of episodes to see stats = 100
 SHOW_PREVIEW = False
 
-'''
-Now we want to bring in our blob class and blob environment.
-'''
 class Blob:
     def __init__(self, size):
         self.size = size
@@ -47,11 +44,6 @@ class Blob:
         return self.x == other.x and self.y == other.y
 
     def action(self, choice):
-        '''
-        Gives us 9 total movement options. (0,1,2,3,4,5,6,7,8)
-        So, now our agent doesn't need to take help of the boundaries
-        to go up-down or left-right.
-        '''
         if choice == 0:
             self.move(x=1, y=1)
         elif choice == 1:
@@ -74,20 +66,17 @@ class Blob:
         elif choice == 8:
             self.move(x=0, y=0)
 
-    def move(self, x = None, y = None):         # updated for TensorFlow 2.4.1
-        # If no value for x, move randomly
+    def move(self, x = None, y = None):
         if x == None:
             self.x += np.random.randint(-1, 2)
         else:
             self.x += x
 
-        # If no value for y, move randomly
         if y == None:
             self.y += np.random.randint(-1, 2)
         else:
             self.y += y
 
-        # If we are out of bounds, fix!
         if self.x < 0:
             self.x = 0
         elif self.x > self.size-1:
@@ -106,10 +95,10 @@ class BlobEnv:
     FOOD_REWARD = 25
     OBSERVATION_SPACE_VALUES = (SIZE, SIZE, 3)  # 4
     ACTION_SPACE_SIZE = 9
-    PLAYER_N = 1  # player key in dict
-    FOOD_N = 2  # food key in dict
-    ENEMY_N = 3  # enemy key in dict
-    # the dict! (colors)
+    PLAYER_N = 1
+    FOOD_N = 2 
+    ENEMY_N = 3 
+
     d = {1: (255, 175, 0),
          2: (0, 255, 0),
          3: (0, 0, 255)}
@@ -134,12 +123,6 @@ class BlobEnv:
     def step(self, action):
         self.episode_step += 1
         self.player.action(action)
-        
-        '''
-        To make the food and enemy move :
-        self.enemy.move()
-        self.food.move()
-        '''
 
         if self.RETURN_IMAGES:
             new_observation = np.array(self.get_image())
@@ -167,11 +150,11 @@ class BlobEnv:
 
     # FOR CNN #
     def get_image(self):
-        env = np.zeros((self.SIZE, self.SIZE, 3), dtype=np.uint8)  # starts an rbg of our size
-        env[self.food.x][self.food.y] = self.d[self.FOOD_N]  # sets the food location tile to green color
-        env[self.enemy.x][self.enemy.y] = self.d[self.ENEMY_N]  # sets the enemy location to red
-        env[self.player.x][self.player.y] = self.d[self.PLAYER_N]  # sets the player tile to blue
-        img = Img.fromarray(env, 'RGB')  # reading to rgb. Apparently. Even tho color definitions are bgr.
+        env = np.zeros((self.SIZE, self.SIZE, 3), dtype=np.uint8)
+        env[self.food.x][self.food.y] = self.d[self.FOOD_N]
+        env[self.enemy.x][self.enemy.y] = self.d[self.ENEMY_N]
+        env[self.player.x][self.player.y] = self.d[self.PLAYER_N]
+        img = Img.fromarray(env, 'RGB')
         return img
 
 
