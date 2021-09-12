@@ -171,7 +171,8 @@ The dict (colours) :
         
 ***
 💢 To make the food and enemy move, we can use :<br>
-self.enemy.move()<br>
+self.enemy.move()
+
 self.food.move()
  
 
@@ -195,8 +196,14 @@ self.food.move()
 
         def render(self):
             img = self.get_image()
-            img = img.resize((300, 300))  # resizing so we can see our agent in all its glory.
-            cv2.imshow("image", np.array(img))  # show it!
+            
+Resizing so we can see our agent in all its glory :
+            
+            img = img.resize((300, 300))
+            
+Show it :
+            
+            cv2.imshow("image", np.array(img))
             cv2.waitKey(1)
 
 ***
