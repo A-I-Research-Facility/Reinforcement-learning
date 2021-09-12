@@ -144,11 +144,10 @@ class BlobEnv:
 
     def render(self):
         img = self.get_image()
-        img = img.resize((300, 300))  # resizing so we can see our agent in all its glory.
-        cv2.imshow("image", np.array(img))  # show it!
+        img = img.resize((300, 300))
+        cv2.imshow("image", np.array(img))
         cv2.waitKey(1)
 
-    # FOR CNN #
     def get_image(self):
         env = np.zeros((self.SIZE, self.SIZE, 3), dtype=np.uint8)
         env[self.food.x][self.food.y] = self.d[self.FOOD_N]
@@ -160,10 +159,8 @@ class BlobEnv:
 
 env = BlobEnv()
 
-# For stats
 ep_rewards = [-200]
 
-# For more repetitive results
 random.seed(1)
 np.random.seed(1)
 tf.random.set_seed(1)
@@ -172,10 +169,7 @@ tf.random.set_seed(1)
 if not os.path.isdir('models'):
     os.makedirs('models')
 
-class ModifiedTensorBoard(TensorBoard):     # completely updated to work with TensorFlow 2.4.1
-                                            # Please do not change this class in any manner
-                                            # or the program may not work at all. If you face some
-                                            # issue regarding this class, please create a pull request.
+class ModifiedTensorBoard(TensorBoard):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.step = 1
@@ -252,21 +246,15 @@ class DQNAgent:
         
         minibatch = random.sample(self.replay_memory, MINIBATCH_SIZE)
 
-        current_states = np.array([transition[0] for transition in minibatch]) / 255    # by dividing here, we are trying to scale the images
-                                                                                        # between 0 and 1 because that is the best way to 
-                                                                                        # teach convolutional neural networks
+        current_states = np.array([transition[0] for transition in minibatch]) / 255
         current_qs_list = self.model.predict(current_states)
 
-        new_current_states = np.array([transition[3] for transition in minibatch]) / 255    # current states after actions are taken
+        new_current_states = np.array([transition[3] for transition in minibatch]) / 255
         future_qs_list = self.target_model.predict(new_current_states)
 
-        X = []      # this list will be the images from the game
-        y = []      # this list will be the actions that model decides to take
+        X = []
+        y = []
 
-        '''
-        With the following loop, we will be able to calculate the last bit (learned value)
-        of the Q-value formula
-        '''
         for index, (current_state, action, reward, new_current_state, done) in enumerate(minibatch):
             if not done:
                 max_future_q = np.max(future_qs_list[index])
@@ -281,12 +269,8 @@ class DQNAgent:
             y.append(current_qs)
 
         self.model.fit(np.array(X) / 255, np.array(y), batch_size = MINIBATCH_SIZE, verbose = 0, shuffle = False,
-        callbacks = [self.tensorboard] if terminal_state else None)     # this command means that we will fit onlt if we are on the 
-                                                                        # terminal state
-        
-        '''
-        Following statement determines if we want to update the target_model yet
-        '''
+        callbacks = [self.tensorboard] if terminal_state else None)
+
         if terminal_state:
             self.target_update_counter += 1
         
@@ -294,12 +278,8 @@ class DQNAgent:
             self.target_model.set_weights(self.model.get_weights())
             self.target_update_counter = 0
 
-# Create agent
 agent = DQNAgent()
 
-'''
-Now we are ready to iterate over everything
-'''
 for episode in tqdm(range(1, EPISODES + 1), ascii = True, unit = "episode"):
     agent.tensorboard.step = episode
     
@@ -328,11 +308,6 @@ for episode in tqdm(range(1, EPISODES + 1), ascii = True, unit = "episode"):
         current_state = new_state
         step += 1
 
-    '''
-    Now we are going to append episode reward and then we will grab various aggregate stats.
-    Then we will create a matplotlib chart with those values.
-    '''
-    # Append episode reward to a list and log stats (every given number of episodes)
     ep_rewards.append(episode_reward)
     if not episode % AGGREGATE_STATS_EVERY or episode == 1:
         average_reward = sum(ep_rewards[-AGGREGATE_STATS_EVERY:])/len(ep_rewards[-AGGREGATE_STATS_EVERY:])
@@ -340,11 +315,9 @@ for episode in tqdm(range(1, EPISODES + 1), ascii = True, unit = "episode"):
         max_reward = max(ep_rewards[-AGGREGATE_STATS_EVERY:])
         agent.tensorboard.update_stats(reward_avg=average_reward, reward_min=min_reward, reward_max=max_reward, epsilon=epsilon)
 
-        # Save model, but only when min reward is greater or equal a set value
         if min_reward >= MIN_REWARD:
             agent.model.save(f'models/{MODEL_NAME}__{max_reward:_>7.2f}max_{average_reward:_>7.2f}avg_{min_reward:_>7.2f}min__{int(time.time())}.model')
 
-    # Decay epsilon
     if epsilon > MIN_EPSILON:
         epsilon *= EPSILON_DECAY
         epsilon = max(MIN_EPSILON, epsilon)
