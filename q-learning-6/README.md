@@ -2,7 +2,7 @@
 our DQN model.
 
 *System requirements :-*<br>
-* TensorFlow            : 2.4.1<br>
+* TensorFlow&nbsp;&nbsp;&nbsp;: 2.4.1<br>
 * Dedicated GPU memory  : 8GB<br>
 * Memory                : 16GB DDR4<br>
 <br>
