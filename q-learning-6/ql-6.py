@@ -1,13 +1,3 @@
-'''
-In continuation with the previous program, we are now going to train
-our DQN model.
-TensorFlow version = 2.4.1 used
-
-This program has a very high computational time and needs lots of cuda cores
-to be even a little efficient. Please ensure you have a gpu with atleast 8GB
-of dedicated video memory and atleast 16GB of DDR4 RAM before running this.
-'''
-
 import tensorflow as tf
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Conv2D, MaxPooling2D, Activation, Flatten
