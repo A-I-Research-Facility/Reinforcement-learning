@@ -1,11 +1,12 @@
-'''
-In continuation with the previous program, we are now going to train
+💢 In continuation with the previous program, we are now going to train
 our DQN model.
-TensorFlow version = 2.4.1 used
+
+TensorFlow version = 2.4.1 used.
+
 This program has a very high computational time and needs lots of cuda cores
 to be even a little efficient. Please ensure you have a gpu with atleast 8GB
 of dedicated video memory and atleast 16GB of DDR4 RAM before running this.
-'''
+
 
     import tensorflow as tf
     from keras.models import Sequential
@@ -37,9 +38,8 @@ of dedicated video memory and atleast 16GB of DDR4 RAM before running this.
     AGGREGATE_STATS_EVERY = 100     # number of episodes to see stats = 100
     SHOW_PREVIEW = False
 
-'''
-Now we want to bring in our blob class and blob environment.
-'''
+***
+💢 Now we want to bring in our blob class and blob environment.
 
     class Blob:
         def __init__(self, size):
@@ -56,12 +56,9 @@ Now we want to bring in our blob class and blob environment.
         def __eq__(self, other):
             return self.x == other.x and self.y == other.y
 
-        def action(self, choice):
-        '''
-        Gives us 9 total movement options. (0,1,2,3,4,5,6,7,8)
-        So, now our agent doesn't need to take help of the boundaries
-        to go up-down or left-right.
-        '''
+We have 9 total movement options. (0,1,2,3,4,5,6,7,8). So, now our agent doesn't need to take help of the boundaries to go up-down or left-right :
+
+        def action(self, choice):   
             if choice == 0:
                 self.move(x=1, y=1)
             elif choice == 1:
@@ -84,20 +81,26 @@ Now we want to bring in our blob class and blob environment.
             elif choice == 8:
                 self.move(x=0, y=0)
 
-        def move(self, x = None, y = None):         # updated for TensorFlow 2.4.1
-            # If no value for x, move randomly
+Updated for TF 2.4.1 :-
+
+        def move(self, x = None, y = None):
+        
+If no value for x, move randomly :
+            
             if x == None:
                 self.x += np.random.randint(-1, 2)
             else:
                 self.x += x
 
-            # If no value for y, move randomly
+If no value for y, move randomly :
+            
             if y == None:
                 self.y += np.random.randint(-1, 2)
             else:
                 self.y += y
 
-            # If we are out of bounds, fix!
+If we are out of bounds, fix :
+
             if self.x < 0:
                 self.x = 0
             elif self.x > self.size-1:
@@ -107,6 +110,7 @@ Now we want to bring in our blob class and blob environment.
             elif self.y > self.size-1:
                 self.y = self.size-1
 
+***
 
     class BlobEnv:
         SIZE = 10
@@ -116,10 +120,21 @@ Now we want to bring in our blob class and blob environment.
         FOOD_REWARD = 25
         OBSERVATION_SPACE_VALUES = (SIZE, SIZE, 3)  # 4
         ACTION_SPACE_SIZE = 9
-        PLAYER_N = 1  # player key in dict
-        FOOD_N = 2  # food key in dict
-        ENEMY_N = 3  # enemy key in dict
-        # the dict! (colors)
+        
+Player key in dict :
+        
+        PLAYER_N = 1
+        
+Food key in dict :
+        
+        FOOD_N = 2
+        
+Enemy key in dict :
+        
+        ENEMY_N = 3
+        
+The dict (colours) :
+        
         d = {1: (255, 175, 0),
             2: (0, 255, 0),
             3: (0, 0, 255)}
@@ -145,11 +160,11 @@ Now we want to bring in our blob class and blob environment.
             self.episode_step += 1
             self.player.action(action)
         
-        '''
-        To make the food and enemy move :
-        self.enemy.move()
+***
+        To make the food and enemy move, we can use :<br>
+        self.enemy.move()<br>
         self.food.move()
-        '''
+ 
 
             if self.RETURN_IMAGES:
                 new_observation = np.array(self.get_image())
