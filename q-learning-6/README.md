@@ -61,7 +61,9 @@ Number of episodes to see stats = 100 :
         def __eq__(self, other):
             return self.x == other.x and self.y == other.y
 
-We have 9 total movement options. (0, 1, 2, 3, 4, 5, 6, 7, 8). So, now our agent doesn't need to take help of the boundaries to go up-down or left-right :
+We have 9 total movement options : 0, 1, 2, 3, 4, 5, 6, 7, 8<br>
+
+So, now our agent doesn't need to take help of the boundaries to go up-down or left-right :
 
         def action(self, choice):   
             if choice == 0:
@@ -166,7 +168,7 @@ The dict (colours) :
             self.player.action(action)
         
 ***
-To make the food and enemy move, we can use :<br>
+💢 To make the food and enemy move, we can use :<br>
 self.enemy.move()<br>
 self.food.move()
  
@@ -195,6 +197,7 @@ self.food.move()
             cv2.imshow("image", np.array(img))  # show it!
             cv2.waitKey(1)
 
+***
 💢 FOR CNN :-
 
         def get_image(self):
