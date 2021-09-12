@@ -4,9 +4,9 @@
 * TensorFlow            : 2.4.1<br>
 * Dedicated GPU memory  : 8GB<br>
 * Memory                : 16GB DDR4<br>
-<br>
 
-⚠️ Warning : this program has a very high computational time. Please match system requirements before proceeding.<br>
+⚠️ Warning : this program has a very high computational time. Please match system requirements before proceeding.
+<br>
 
     import tensorflow as tf
     from keras.models import Sequential
