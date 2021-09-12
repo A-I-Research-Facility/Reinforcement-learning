@@ -29,6 +29,7 @@
 Batch size for training data :
     
     MINIBATCH_SIZE = 64
+    
     DISCOUNT = 0.99
     UPDATE_TARGET_EVERY = 5
     MIN_REWARD = -200
@@ -41,6 +42,7 @@ Batch size for training data :
 Number of episodes to see stats = 100 :
 
     AGGREGATE_STATS_EVERY = 100
+    
     SHOW_PREVIEW = False
 
 ***
