@@ -225,6 +225,7 @@ Reading to rgb, even tho color definitions are bgr :
             return img
 
 ***
+💢 Initailizing environment :
 
     env = BlobEnv()
 
@@ -244,7 +245,8 @@ Create models folder :
         os.makedirs('models')
 
 ***
-💢 Following class is modified to work with TensorFlow 2.4.1<br>
+💢 Following class is modified to work with TensorFlow 2.4.1
+
 Please do not change this class in any manner, or the program may not work at all. If you face some issue regarding this class, please create a discussion.
 
     class ModifiedTensorBoard(TensorBoard):
@@ -329,18 +331,21 @@ Please do not change this class in any manner, or the program may not work at al
         
             minibatch = random.sample(self.replay_memory, MINIBATCH_SIZE)
 
-By dividing in the following statement, we are trying to scale the images between 0 and 1 because that is the best way to teach convolutional neural networks :
+***
+💢 By dividing in the following statement, we are trying to scale the images between 0 and 1 because that is the best way to teach convolutional neural networks :
 
             current_states = np.array([transition[0] for transition in minibatch]) / 255
             
             current_qs_list = self.model.predict(current_states)
 
-Current states after actions are taken :
+***
+💢 Current states after actions are taken :
 
             new_current_states = np.array([transition[3] for transition in minibatch]) / 255
             future_qs_list = self.target_model.predict(new_current_states)
 
-Following list will be the images from the game :
+***
+💢 Following list will be the images from the game :
 
             X = []
             
@@ -428,12 +433,14 @@ Append episode reward to a list and log stats (every given number of episodes) :
             max_reward = max(ep_rewards[-AGGREGATE_STATS_EVERY:])
             agent.tensorboard.update_stats(reward_avg=average_reward, reward_min=min_reward, reward_max=max_reward, epsilon=epsilon)
 
-Save model, but only when min reward is greater or equal a set value :
+***
+💢 Save model, but only when min reward is greater or equal a set value :
 
             if min_reward >= MIN_REWARD:
                 agent.model.save(f'models/{MODEL_NAME}__{max_reward:_>7.2f}max_{average_reward:_>7.2f}avg_{min_reward:_>7.2f}min__{int(time.time())}.model')
 
-Decay epsilon :
+***
+💢 Decay epsilon :
 
         if epsilon > MIN_EPSILON:
             epsilon *= EPSILON_DECAY
