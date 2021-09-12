@@ -6,6 +6,8 @@
 * Memory                : 16GB DDR4<br>
 <br>
 
+⚠️ Warning : this program has a very high computational time. Please match system requirements before proceeding.<br>
+
     import tensorflow as tf
     from keras.models import Sequential
     from keras.layers import Dense, Dropout, Conv2D, MaxPooling2D, Activation, Flatten
