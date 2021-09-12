@@ -195,34 +195,57 @@ self.food.move()
             cv2.imshow("image", np.array(img))  # show it!
             cv2.waitKey(1)
 
-        # FOR CNN #
+💢 FOR CNN :-
+
         def get_image(self):
-            env = np.zeros((self.SIZE, self.SIZE, 3), dtype=np.uint8)  # starts an rbg of our size
-            env[self.food.x][self.food.y] = self.d[self.FOOD_N]  # sets the food location tile to green color
-            env[self.enemy.x][self.enemy.y] = self.d[self.ENEMY_N]  # sets the enemy location to red
-            env[self.player.x][self.player.y] = self.d[self.PLAYER_N]  # sets the player tile to blue
-            img = Img.fromarray(env, 'RGB')  # reading to rgb. Apparently. Even tho color definitions are bgr.
+        
+Starts an rbg of our size :
+        
+            env = np.zeros((self.SIZE, self.SIZE, 3), dtype=np.uint8)
+            
+Sets the food location tile to green color :
+            
+            env[self.food.x][self.food.y] = self.d[self.FOOD_N]
+            
+Sets the enemy location to red :
+            
+            env[self.enemy.x][self.enemy.y] = self.d[self.ENEMY_N]
+            
+Sets the player tile to blue :
+            
+            env[self.player.x][self.player.y] = self.d[self.PLAYER_N]
+            
+Reading to rgb, even tho color definitions are bgr :
+            
+            img = Img.fromarray(env, 'RGB')
+            
             return img
 
+***
 
     env = BlobEnv()
 
-    # For stats
+For stats :
+
     ep_rewards = [-200]
 
-    # For more repetitive results
+For more repetitive results :
+
     random.seed(1)
     np.random.seed(1)
     tf.random.set_seed(1)
 
-    # Create models folder
+Create models folder :
+
     if not os.path.isdir('models'):
         os.makedirs('models')
 
-    class ModifiedTensorBoard(TensorBoard):     # completely updated to work with TensorFlow 2.4.1
-                                            # Please do not change this class in any manner
-                                            # or the program may not work at all. If you face some
-                                            # issue regarding this class, please create a pull request.
+***
+💢 Following class is modified to work with TensorFlow 2.4.1<br>
+Please do not change this class in any manner, or the program may not work at all. If you face some issue regarding this class, please create a discussion.
+
+    class ModifiedTensorBoard(TensorBoard):
+    
         def __init__(self, **kwargs):
             super().__init__(**kwargs)
             self.step = 1
@@ -255,6 +278,9 @@ self.food.move()
                     tf.summary.scalar(key, value, step = self.step)
                     self.writer.flush()
 
+***
+💢 Foloowing class is already explained in previous codes. Please go through them if you face any issues.
+
     class DQNAgent:
         def __init__(self):
             self.model = self.create_model() 
@@ -265,6 +291,7 @@ self.food.move()
             self.replay_memory = deque(maxlen = REPLAY_MEMORY_SIZE)
 
             self.tensorboard = ModifiedTensorBoard(log_dir = f"logs/{MODEL_NAME}-{int(time.time())}")
+            
             self.target_update_counter = 0      
 
         def create_model(self):
@@ -299,21 +326,27 @@ self.food.move()
         
             minibatch = random.sample(self.replay_memory, MINIBATCH_SIZE)
 
-            current_states = np.array([transition[0] for transition in minibatch]) / 255    # by dividing here, we are trying to scale the images
-                                                                                        # between 0 and 1 because that is the best way to 
-                                                                                        # teach convolutional neural networks
+By dividing in the following statement, we are trying to scale the images between 0 and 1 because that is the best way to teach convolutional neural networks :
+
+            current_states = np.array([transition[0] for transition in minibatch]) / 255
+            
             current_qs_list = self.model.predict(current_states)
 
-            new_current_states = np.array([transition[3] for transition in minibatch]) / 255    # current states after actions are taken
+Current states after actions are taken :
+
+            new_current_states = np.array([transition[3] for transition in minibatch]) / 255
             future_qs_list = self.target_model.predict(new_current_states)
 
-            X = []      # this list will be the images from the game
-            y = []      # this list will be the actions that model decides to take
+Following list will be the images from the game :
 
-        '''
-        With the following loop, we will be able to calculate the last bit (learned value)
-        of the Q-value formula
-        '''
+            X = []
+            
+Following list will be the actions that model decides to take :
+            
+            y = []
+
+***
+💢 With the following loop, we will be able to calculate the last bit (learned value) of the Q-value formula :
         
             for index, (current_state, action, reward, new_current_state, done) in enumerate(minibatch):
                 if not done:
@@ -329,12 +362,13 @@ self.food.move()
                 y.append(current_qs)
 
             self.model.fit(np.array(X) / 255, np.array(y), batch_size = MINIBATCH_SIZE, verbose = 0, shuffle = False,
-            callbacks = [self.tensorboard] if terminal_state else None)     # this command means that we will fit onlt if we are on the 
-                                                                        # terminal state
+            
+***
+💢 Following command means that we will fit only if we are on the terminal state :
+            
+            callbacks = [self.tensorboard] if terminal_state else None)     
         
-        '''
-        Following statement determines if we want to update the target_model yet
-        '''
+Following statement determines if we want to update the target_model yet :
         
             if terminal_state:
                 self.target_update_counter += 1
@@ -343,12 +377,13 @@ self.food.move()
                 self.target_model.set_weights(self.model.get_weights())
                 self.target_update_counter = 0
 
-    # Create agent
+***
+💢 Create agent :
+
     agent = DQNAgent()
 
-'''
-Now we are ready to iterate over everything
-'''
+***
+💢 Now we are ready to iterate over everything.
 
     for episode in tqdm(range(1, EPISODES + 1), ascii = True, unit = "episode"):
         agent.tensorboard.step = episode
@@ -378,12 +413,11 @@ Now we are ready to iterate over everything
             current_state = new_state
             step += 1
 
-    '''
-    Now we are going to append episode reward and then we will grab various aggregate stats.
-    Then we will create a matplotlib chart with those values.
-    '''
+***
+💢 Now we are going to append episode reward and then we will grab various aggregate stats. Then we will create a matplotlib chart with those values.
     
-        # Append episode reward to a list and log stats (every given number of episodes)
+Append episode reward to a list and log stats (every given number of episodes) :
+
         ep_rewards.append(episode_reward)
         if not episode % AGGREGATE_STATS_EVERY or episode == 1:
             average_reward = sum(ep_rewards[-AGGREGATE_STATS_EVERY:])/len(ep_rewards[-AGGREGATE_STATS_EVERY:])
@@ -391,11 +425,13 @@ Now we are ready to iterate over everything
             max_reward = max(ep_rewards[-AGGREGATE_STATS_EVERY:])
             agent.tensorboard.update_stats(reward_avg=average_reward, reward_min=min_reward, reward_max=max_reward, epsilon=epsilon)
 
-            # Save model, but only when min reward is greater or equal a set value
+Save model, but only when min reward is greater or equal a set value :
+
             if min_reward >= MIN_REWARD:
                 agent.model.save(f'models/{MODEL_NAME}__{max_reward:_>7.2f}max_{average_reward:_>7.2f}avg_{min_reward:_>7.2f}min__{int(time.time())}.model')
 
-        # Decay epsilon
+Decay epsilon :
+
         if epsilon > MIN_EPSILON:
             epsilon *= EPSILON_DECAY
             epsilon = max(MIN_EPSILON, epsilon)
