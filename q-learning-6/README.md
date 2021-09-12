@@ -166,9 +166,9 @@ The dict (colours) :
             self.player.action(action)
         
 ***
-        To make the food and enemy move, we can use :<br>
-        self.enemy.move()<br>
-        self.food.move()
+To make the food and enemy move, we can use :<br>
+self.enemy.move()<br>
+self.food.move()
  
 
             if self.RETURN_IMAGES:
