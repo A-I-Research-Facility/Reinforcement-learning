@@ -87,33 +87,33 @@ For internally tracking when to update the target model :
         
         self.target_update_counter = 0
 
-    def create_model(self):
-        model = Sequential()
-        model.add(Conv2D(256, (3, 3), input_shape = env.OBSERVATION_SPACE_VALUES))
+        def create_model(self):
+            model = Sequential()
+            model.add(Conv2D(256, (3, 3), input_shape = env.OBSERVATION_SPACE_VALUES))
         
 Rectified linear activation :
         
-        model.add(Activation("relu"))
-        model.add(MaxPooling2D(2, 2))
-        model.add(Dropout(0.2))
+            model.add(Activation("relu"))
+            model.add(MaxPooling2D(2, 2))
+            model.add(Dropout(0.2))
 
-        model.add(Conv2D(256, (3, 3)))
-        model.add(Activation("relu"))
-        model.add(MaxPooling2D(2, 2))
-        model.add(Dropout(0.2))
+            model.add(Conv2D(256, (3, 3)))
+            model.add(Activation("relu"))
+            model.add(MaxPooling2D(2, 2))
+            model.add(Dropout(0.2))
 
-        model.add(Flatten())
-        model.add(Dense(64))
+            model.add(Flatten())
+            model.add(Dense(64))
 
-        model.add(Dense(env.ACTION_SPACE_SIZE, activation = "linear"))
-        model.compile(loss="mse", optimizer = Adam(lr=0.001), metrics=['accuracy'])
+            model.add(Dense(env.ACTION_SPACE_SIZE, activation = "linear"))
+            model.compile(loss="mse", optimizer = Adam(lr=0.001), metrics=['accuracy'])
 
-        return model
+            return model
     
-    def update_replay_memory(self, transition):
-        self.replay_memory.append(transition)
+        def update_replay_memory(self, transition):
+            self.replay_memory.append(transition)
 
-    def get_qs(self, state, step):
-        return self.model.predeict(np.array(state).reshape(-1, *state.shape) / 255)[0]      # to normalize the RGB image data that we are
-                                                                                            # passing, we divide by 255
-                        
+To normalize the RGB image data that we are passing, we divide by 255 :
+
+        def get_qs(self, state, step):
+            return self.model.predeict(np.array(state).reshape(-1, *state.shape) / 255)[0]
