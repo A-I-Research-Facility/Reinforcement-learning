@@ -25,7 +25,10 @@ of dedicated video memory and atleast 16GB of DDR4 RAM before running this.
     REPLAY_MEMORY_SIZE = 50_000
     MODEL_NAME = "256x2"
     MIN_REPLAY_MEMORY_SIZE = 1_000
-    MINIBATCH_SIZE = 64     # batch size for training data
+    
+Batch size for training data :
+    
+    MINIBATCH_SIZE = 64
     DISCOUNT = 0.99
     UPDATE_TARGET_EVERY = 5
     MIN_REWARD = -200
@@ -35,7 +38,9 @@ of dedicated video memory and atleast 16GB of DDR4 RAM before running this.
     EPSILON_DECAY = 0.99975
     MIN_EPSILON = 0.001
 
-    AGGREGATE_STATS_EVERY = 100     # number of episodes to see stats = 100
+Number of episodes to see stats = 100 :
+
+    AGGREGATE_STATS_EVERY = 100
     SHOW_PREVIEW = False
 
 ***
@@ -56,7 +61,7 @@ of dedicated video memory and atleast 16GB of DDR4 RAM before running this.
         def __eq__(self, other):
             return self.x == other.x and self.y == other.y
 
-We have 9 total movement options. (0,1,2,3,4,5,6,7,8). So, now our agent doesn't need to take help of the boundaries to go up-down or left-right :
+We have 9 total movement options. (0, 1, 2, 3, 4, 5, 6, 7, 8). So, now our agent doesn't need to take help of the boundaries to go up-down or left-right :
 
         def action(self, choice):   
             if choice == 0:
@@ -81,7 +86,7 @@ We have 9 total movement options. (0,1,2,3,4,5,6,7,8). So, now our agent doesn't
             elif choice == 8:
                 self.move(x=0, y=0)
 
-Updated for TF 2.4.1 :-
+Updated method 'move' for TF 2.4.1 :-
 
         def move(self, x = None, y = None):
         
