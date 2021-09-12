@@ -28,7 +28,7 @@ of episodes. But we just want one log file, that gets updated. Hence, the below 
 
 Own Tensorboard class :
 
-      class ModifiedTensorBoard(TensorBoard):
+    class ModifiedTensorBoard(TensorBoard):
 
 Overriding init to set initial step and writer (we want one log file for all .fit() calls) :
 
