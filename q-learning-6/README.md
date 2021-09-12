@@ -1,8 +1,7 @@
-💢 In continuation with the previous program, we are now going to train
-our DQN model.
+💢 In continuation with the previous program, we are now going to train our DQN model.
 
 *System requirements :-*<br>
-* TensorFlow&nbsp;&nbsp;&nbsp;: 2.4.1<br>
+* TensorFlow            : 2.4.1<br>
 * Dedicated GPU memory  : 8GB<br>
 * Memory                : 16GB DDR4<br>
 <br>
