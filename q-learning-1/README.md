@@ -46,7 +46,7 @@ We will do this conversion at the necessary time.
 
 ***
 💢 When we run this program, we see a car trying to climb the hill. But it isn't able to because it needs more momentum.
-So, now we need to do that
+So, now we need to do that.
 
 What we require, technically, is a mathematical function. But, in reality, we are just going to take the python form of it.
 That python code we are creating now is called Q-table. It's a large table, that carries all possible combinations of
