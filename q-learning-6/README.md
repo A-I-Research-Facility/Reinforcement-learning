@@ -5,7 +5,7 @@
 * Dedicated GPU memory  : 8GB<br>
 * Memory                : 16GB DDR4<br>
 
-⚠️ Warning : this program has a very high computational time. Please match system requirements before proceeding.
+⚠️ Warning : this program has a high computational requirements. Please match them before proceeding.
 <br>
 
     import tensorflow as tf
