@@ -3,7 +3,7 @@
 *System requirements :-*<br>
 * TensorFlow            : 2.4.1<br>
 * Dedicated GPU memory  : 8GB<br>
-* Memory                : 16GB DDR4<br>
+* Memory                : 16GB<br>
 
 ⚠️ Warning : this program has a high computational requirements. Please match them before proceeding.
 <br>
