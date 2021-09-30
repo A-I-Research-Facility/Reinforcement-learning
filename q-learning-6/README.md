@@ -2,6 +2,7 @@
 
 *System requirements :-*<br>
 * TensorFlow            : 2.4.1<br>
+* Dedicated GPU
 * Dedicated GPU memory  : 8GB<br>
 * Memory                : 16GB<br>
 
