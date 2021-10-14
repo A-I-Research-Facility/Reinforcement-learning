@@ -20,8 +20,7 @@ Creating an environment with mountain and a car :-
     env = gym.make("MountainCar-v0")
     env.reset()     
 
-Resetting is the first thing to do after we create an environment
-Then we are ready to iterate through it.
+Resetting is the first thing to do after we create an environment, then we are ready to iterate through it.
 
 ***
 💢 This environment has three actions, 0 = push car left, 1 = do nothing, 2 = push car right
