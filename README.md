@@ -134,7 +134,8 @@ Or -
     sudo python3 -m pip install pyglet
 
 <br>
-An example models directory and a logs directory has been attached for reference.<br>
+
+An example `models` directory and a `logs` directory has been attached for reference.
 <br>
 
 Now, you should go and check the following directories for programs based on reinforcement learning. All programs are daisy chained, so please go through them in sequence :<br>
