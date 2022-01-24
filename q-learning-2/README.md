@@ -14,7 +14,7 @@ are introduced here.
     
     LEARNING_RATE = 0.1
 
-Measure of how much we value future reward over current reward (>0, <1) :-
+Measure of how much we value future reward over current reward (> 0, < 1) :-
 
     DISCOUNT = 0.95    
     EPISODES = 25000
@@ -26,7 +26,7 @@ Measure of how much we value future reward over current reward (>0, <1) :-
 
 ***
 💢 Some models require some random actions to be taken to ge the desired result. For this, we need to define
-epsilon over here. Even though in this case, our model is able to achive the goal without requiring
+`EPSILON` over here. Even though in this case, our model is able to achive the goal without requiring
 this varible. Also, the value of epsilon varies between 0 and 1 only.
 
 Epsilon basically helps the model explore in random directions. It is suprising what the model finds
