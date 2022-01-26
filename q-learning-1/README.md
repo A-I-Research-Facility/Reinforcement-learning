@@ -69,7 +69,7 @@ RL model would not have this hardcoded beacuse it will change with environment.
 
     DISCRETE_OS_SIZE = [20] * len(env.observation_space.high) 
 
-20 * the length of any random observation space thing = [20] * 2
+20 x the length of any random observation space thing = [20] x 2
 
 We are trying to separate the range of observation into 20 discrete chunks. Now we need to know the size of
 those chunks.
