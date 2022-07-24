@@ -34,8 +34,9 @@ Resetting is the first thing to do after we create an environment, then we are r
         
 Everytime we step through an action, we get a new_state from environment.
 For our sake of understanding, we know that the state returned by the 
-environment is position and velocity.
-Note : the states returned over here are continuous. We need to convert them
+environment is position and velocity.<br>
+
+**Note** : the states returned over here are continuous. We need to convert them
 to discrete or else our model will continue to train in a never ending scenario.
 We will do this conversion at the necessary time.
     
@@ -45,10 +46,10 @@ We will do this conversion at the necessary time.
 
 ***
 💢 When we run this program, we see a car trying to climb the hill. But it isn't able to because it needs more momentum.
-So, now we need to do that.
+So now, we need to increase its momentum.
 
 What we require, technically, is a mathematical function. But, in reality, we are just going to take the python form of it.
-That python code we are creating now is called Q-table. It's a large table, that carries all possible combinations of
+That python code we are creating now is called `Q-table`. It's a large table, that carries all possible combinations of
 position and velocity of the car. We can just look at the table, to get our desired answer.
 
 We initialise the Q-table with random values. So, first our agent explores and does random stuff, but slowly updates those
