@@ -32,10 +32,10 @@ Resetting is the first thing to do after we create an environment, then we are r
 
         new_state, reward, done, _ = env.step(action)
         
-Everytime we step through an action, we get a new_state from environment
+Everytime we step through an action, we get a new_state from environment.
 For our sake of understanding, we know that the state returned by the 
 environment is position and velocity.
-Note : the states returned over her are continuous. We need to convert them
+Note : the states returned over here are continuous. We need to convert them
 to discrete or else our model will continue to train in a never ending scenario.
 We will do this conversion at the necessary time.
     
