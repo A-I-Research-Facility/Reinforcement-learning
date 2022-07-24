@@ -8,7 +8,7 @@ a) go left, <br>
 b) go right, <br>
 c) don't move
 
-This program serves as an introduction to Q-tables, how they are created, and used.
+This program serves as an introduction to Q-tables. We get to learn how they are created, updated, and used.
 
 The evironment used over here doesn't make a difference to our model, but we are using
 it because of its simplicity.
