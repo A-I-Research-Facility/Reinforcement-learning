@@ -25,12 +25,12 @@ Measure of how much we value future reward over current reward (> 0, < 1) :-
     discrete_os_win_size = (env.observation_space.high-env.observation_space.low) / DISCRETE_OS_SIZE
 
 ***
-💢 Some models require some random actions to be taken to ge the desired result. For this, we need to define
+💢 Some models require some random actions to be taken to get the desired result. For this, we need to define
 `EPSILON` over here. Even though in this case, our model is able to achive the goal without requiring
-this varible. Also, the value of epsilon varies between 0 and 1 only.
+this variable. Also, the value of epsilon varies between 0 and 1 only.
 
-Epsilon basically helps the model explore in random directions. It is suprising what the model finds
-out sometimes. The higher the epsilon, the more likely the model is to perform a random action.
+Epsilon basically helps the model explore random directions. It is suprising what the model finds
+out sometimes. The higher the value of epsilon, the more likely the model is to perform a random action.
 
     epsilon = 0.5
     START_EPSILON_DECAYING = 1
